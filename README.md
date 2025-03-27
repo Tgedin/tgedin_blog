@@ -1,72 +1,39 @@
 # From Bricks to Bytes
 
-## About This Project
-This repository contains the source code for my personal website built with Next.js and deployed on Vercel. The site serves as both a blog for publishing articles and a hub for showcasing projects.
-
-## Project Purpose
-This site serves two main goals:
-- To publish articles, thoughts, and tutorials
-- To showcase projects and serve as a professional portfolio
+A minimalist personal blog built with Next.js, focusing on content about my journey from civil engineering to data science.
 
 ## Tech Stack
-- **Framework:** Next.js (v13+)
-- **Hosting:** Vercel
-- **Content Management:** MDX/Markdown
+
+- **Framework:** Next.js
+- **Content:** MDX/Markdown with JSON metadata
 - **Styling:** Custom CSS
-- **Content Indexing:** JSON-based
-- **Structure:** Year-based routing for blog content
+- **Deployment:** Vercel
 
-## Structure
-- Year-based blog post organization
-- Project showcase section with links to repositories
-- Clean, minimal design for easy maintenance
-- Mobile-responsive layout
+## Key Features
 
-## Development Roadmap
+- Year-based blog organization
+- Project showcase
+- Dark/light mode
+- Table-style content listing
+- Mobile-responsive design
 
-### Phase 1: Basic Setup ✅
-- Initialize Next.js project
-- Implement basic routing and layout
-- Setup MDX processing
-- Create basic styling
+## Quick Start
 
-### Phase 2: Content Management
-- Setup year-based content organization
-- Create article components
-- Add project showcase components
-
-### Phase 3: Design Implementation
-- Implement minimalist typography
-- Optimize for readability
-- Create code block styling
-- Ensure responsive design
-
-### Phase 4: Deployment & Integration
-- Deploy to Vercel
-- Setup custom domain (if applicable)
-- Implement basic analytics
-- Create RSS feed
-
-### Phase 5: Advanced Features
-- Add search functionality
-- Implement dark mode
-- Add repository integrations
-- Improve performance optimizations
-
-## Setup Instructions
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/from-bricks-to-bytes.git
-
-# Navigate to project directory
-cd from-bricks-to-bytes
-
 # Install dependencies
 npm install
 
 # Run development server
 npm run dev
+
+# Build for production
+npm run build
 ```
 
+## Content Workflow
+
+See [CONTENT-WORKFLOW.md](./CONTENT-WORKFLOW.md) for details on how to add new posts and projects.
+
 ## License
-MIT License
+
+MIT
