@@ -1,6 +1,6 @@
 # From Bricks to Bytes
 
-A minimalist personal blog built with Next.js, focusing on content about my journey from civil engineering to data science.
+A personal journey documenting my transition from urban planning and civil engineering to entrepreneurship, where I explore how innovative solutions can address the systemic inefficiencies I observed in urban environments and beyond.
 
 ## Tech Stack
 
