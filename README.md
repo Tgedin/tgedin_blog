@@ -1,114 +1,72 @@
-# tgedin
-Personal and Profesionnal Blog
-Learning Blog Project
-About This Project
-This repository contains the source code for my personal blog built with Next.js and deployed on Vercel. The blog serves as both a learning platform for modern web development and a space to document my journey from civil engineering to data science and machine learning.
+# From Bricks to Bytes
 
-Project Purpose
-This blog serves two main goals:
+## About This Project
+This repository contains the source code for my personal website built with Next.js and deployed on Vercel. The site serves as both a blog for publishing articles and a hub for showcasing projects.
 
-To learn and practice the required tech stack (Next.js, Vercel, MDX, etc.)
+## Project Purpose
+This site serves two main goals:
+- To publish articles, thoughts, and tutorials
+- To showcase projects and serve as a professional portfolio
 
-To publish and organize my progress in data science and machine learning in a structured manner
+## Tech Stack
+- **Framework:** Next.js (v13+)
+- **Hosting:** Vercel
+- **Content Management:** MDX/Markdown
+- **Styling:** Custom CSS
+- **Content Indexing:** JSON-based
+- **Structure:** Year-based routing for blog content
 
-Tech Stack
-Framework: Next.js (v13+)
+## Structure
+- Year-based blog post organization
+- Project showcase section with links to repositories
+- Clean, minimal design for easy maintenance
+- Mobile-responsive layout
 
-Hosting: Vercel
+## Development Roadmap
 
-Content Management: MDX/Markdown
+### Phase 1: Basic Setup ✅
+- Initialize Next.js project
+- Implement basic routing and layout
+- Setup MDX processing
+- Create basic styling
 
-Styling: Custom CSS-in-JS
+### Phase 2: Content Management
+- Setup year-based content organization
+- Create article components
+- Add project showcase components
 
-Content Indexing: JSON-based
+### Phase 3: Design Implementation
+- Implement minimalist typography
+- Optimize for readability
+- Create code block styling
+- Ensure responsive design
 
-Structure: Year-based routing
+### Phase 4: Deployment & Integration
+- Deploy to Vercel
+- Setup custom domain (if applicable)
+- Implement basic analytics
+- Create RSS feed
 
-Content Focus
-Documentation of my learning journey from civil engineering to data science
+### Phase 5: Advanced Features
+- Add search functionality
+- Implement dark mode
+- Add repository integrations
+- Improve performance optimizations
 
-Insights and tutorials on AI, machine learning, and data analysis
+## Setup Instructions
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/from-bricks-to-bytes.git
 
-Project showcases and development processes
+# Navigate to project directory
+cd from-bricks-to-bytes
 
-Reflections on applying civil engineering knowledge to data science challenges
+# Install dependencies
+npm install
 
-Technical Learning Objectives
-Master Next.js for server-side rendering and static site generation
+# Run development server
+npm run dev
+```
 
-Implement efficient content management using MDX
-
-Optimize deployment and hosting with Vercel
-
-Experiment with AI-powered features (search, content suggestions, etc.)
-
-Maintain performance and accessibility standards
-
-Blog Structure
-Year-based routing for easy content organization
-
-Minimal, content-focused design 
-
-Mobile-responsive layout
-
-Performance-optimized for fast loading times
-
-Development Roadmap
-Phase 1: Basic Setup
- Initialize Next.js project
-
- Implement basic routing and layout
-
- Setup MDX processing
-
- Create basic styling
-
-Phase 2: Content Management
- Setup year-based content organization
-
- Implement posts.json indexing
-
- Create article components (Title, Date, etc.)
-
-Phase 3: Design Implementation
- Implement minimalist typography
-
- Optimize for readability (65ch max-width)
-
- Create code block styling
-
- Ensure responsive design
-
-Phase 4: Deployment & Integration
- Deploy to Vercel
-
- Setup custom domain (if applicable)
-
- Implement basic analytics
-
- Create RSS feed
-
-Phase 5: Advanced Features
- Add search functionality
-
- Implement dark mode
-
- Add scroll progress indicator
-
- Integrate AI-powered features
-
-Writing Process
-Draft posts in Markdown, focusing on clear explanations and code examples
-
-Use the blog as a tool for reinforcing learning
-
-Mix tutorial-style posts with project showcases
-
-Document challenges and solutions encountered during the learning process
-
-Community Engagement
-Share blog posts on relevant platforms (LinkedIn, Twitter, data science forums)
-
-Encourage feedback and discussions
-
-Use the blog as a networking tool within the data science community
+## License
+MIT License
