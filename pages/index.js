@@ -8,7 +8,7 @@ export default function Home({ recentPosts }) {
     <MainLayout>
       <div className="home-container">
         <h1 className="site-title">From Bricks to Bytes</h1>
-        <p className="intro">Personal blog by Theo Gedin</p>
+        <p className="intro">Personal blog by <span itemProp="name">Theo Gedin</span></p>
         
         {recentPosts.length > 0 && (
           <section className="featured-section">
