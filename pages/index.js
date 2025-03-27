@@ -3,31 +3,41 @@ import MainLayout from '../layouts/MainLayout';
 import { getAllPosts } from '../lib/posts';
 import { formatDate } from '../lib/date';
 
-export default function Home({ featuredPosts }) {
+export default function Home({ recentPosts }) {
   return (
     <MainLayout>
       <div className="home-container">
         <h1 className="site-title">From Bricks to Bytes</h1>
         <p className="intro">Personal blog by Theo Gedin</p>
         
-        {featuredPosts.length > 0 && (
+        {recentPosts.length > 0 && (
           <section className="featured-section">
-            <h2>Featured Articles</h2>
-            <ul className="featured-posts">
-              {featuredPosts.map(post => (
-                <li key={post.id}>
-                  <Link href={`/blog/${post.year}/${post.id}`}>
-                    <article>
-                      <h3>{post.title}</h3>
-                      <time dateTime={post.date}>{formatDate(post.date)}</time>
-                      <p>{post.description}</p>
-                    </article>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <h2 className="featured-heading">Recent Articles</h2>
+            
+            <table className="content-table">
+              <tbody>
+                {recentPosts.map(post => (
+                  <tr key={post.id}>
+                    <td className="date-cell">
+                      {formatDate(post.date).split(' ')[0]} {/* Just month */}
+                      <br />
+                      {formatDate(post.date).split(' ')[1].replace(',', '')} {/* Just day number */}
+                    </td>
+                    <td className="content-cell">
+                      <Link href={`/blog/${post.year}/${post.id}`}>
+                        <h3>{post.title}</h3>
+                        {post.description && <p>{post.description}</p>}
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            
             <div className="view-all">
-              <Link href="/blog">View all articles →</Link>
+              <Link href="/blog" className="view-all-link">
+                View all articles →
+              </Link>
             </div>
           </section>
         )}
@@ -38,11 +48,15 @@ export default function Home({ featuredPosts }) {
 
 export async function getStaticProps() {
   const allPosts = getAllPosts();
-  const featuredPosts = allPosts.filter(post => post.featured).slice(0, 3);
+  
+  // Sort posts by date (newest first) and take only the 5 most recent
+  const recentPosts = allPosts
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 5);
   
   return {
     props: {
-      featuredPosts,
+      recentPosts,
     },
   };
 }

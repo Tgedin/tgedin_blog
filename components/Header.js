@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 export default function Header() {
   const router = useRouter();
-  const [theme, setTheme] = useState('system');
+  const [theme, setTheme] = useState('light'); // Default to light instead of system
   
   // Helper function to check if a link is active
   const isActive = (path) => {
@@ -14,73 +14,33 @@ export default function Header() {
     return router.pathname.startsWith(path);
   };
   
-  // Function to apply theme based on system preference
-  const applySystemTheme = () => {
-    const prefersDark = window.matchMedia && 
-                       window.matchMedia('(prefers-color-scheme: dark)').matches;
-    document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-  };
-  
-  // Initialize theme from localStorage or system preference
+  // Initialize theme from localStorage or default to light
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // Get saved theme
+      // Get saved theme or default to light
       const savedTheme = localStorage.getItem('theme');
       
       if (savedTheme) {
         // If user has a saved preference, use it
         setTheme(savedTheme);
-        if (savedTheme === 'system') {
-          applySystemTheme();
-        } else {
-          document.documentElement.setAttribute('data-theme', savedTheme);
-        }
+        document.documentElement.setAttribute('data-theme', savedTheme);
       } else {
-        // Default to system theme if no preference is saved
-        setTheme('system');
-        applySystemTheme();
+        // Default to light theme if no preference is saved
+        setTheme('light');
+        document.documentElement.setAttribute('data-theme', 'light');
       }
-      
-      // Add listener for system preference changes
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      
-      // Function to handle system preference changes
-      const handleSystemThemeChange = (e) => {
-        if (theme === 'system') {
-          document.documentElement.setAttribute(
-            'data-theme', 
-            e.matches ? 'dark' : 'light'
-          );
-        }
-      };
-      
-      // Add event listener
-      mediaQuery.addEventListener('change', handleSystemThemeChange);
-      
-      // Clean up
-      return () => mediaQuery.removeEventListener('change', handleSystemThemeChange);
     }
-  }, [theme]);
+  }, []);
   
-  // Toggle theme function - now cycles through light, dark, system
+  // Toggle theme function - simplified to only switch between light and dark
   const toggleTheme = () => {
-    const themeMap = {
-      'light': 'dark',
-      'dark': 'system',
-      'system': 'light'
-    };
-    
-    const newTheme = themeMap[theme];
+    const newTheme = theme === 'light' ? 'dark' : 'light';
     
     // Update state
     setTheme(newTheme);
     
     // Update DOM
-    if (newTheme === 'system') {
-      applySystemTheme();
-    } else {
-      document.documentElement.setAttribute('data-theme', newTheme);
-    }
+    document.documentElement.setAttribute('data-theme', newTheme);
     
     // Save preference
     localStorage.setItem('theme', newTheme);
@@ -88,14 +48,9 @@ export default function Header() {
     console.log('Theme toggled to:', newTheme);
   };
   
-  // Function to get the proper theme icon
+  // Function to get the proper theme icon - simplified
   const getThemeIcon = () => {
-    switch (theme) {
-      case 'light': return '☀️';
-      case 'dark': return '🌙';
-      case 'system': return '🖥️';
-      default: return '☀️';
-    }
+    return theme === 'light' ? '🌙' : '☀️'; // Moon for light (toggle to dark), Sun for dark (toggle to light)
   };
   
   return (
@@ -117,7 +72,7 @@ export default function Header() {
           <button 
             className="theme-toggle" 
             onClick={toggleTheme}
-            aria-label={`Switch theme, current theme is ${theme}`}
+            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             title={`Theme: ${theme}`}
           >
             {getThemeIcon()}

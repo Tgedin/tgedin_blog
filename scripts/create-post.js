@@ -76,6 +76,7 @@ Your second section content...
             id: slug,
             title: title,
             date: today,
+            lastUpdated: today,  // Add this line to set initial lastUpdated equal to date
             description: description,
             tags: tags,
             year: year,

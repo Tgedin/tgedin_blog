@@ -11,26 +11,28 @@ export default function Blog({ posts, years }) {
       
       {years.map(year => (
         <section key={year}>
-          <h2>{year}</h2>
-          <ul className="post-list">
-            {posts
-              .filter(post => post.year === year)
-              .map(post => (
-                <li key={post.id} className="post-item">
-                  <Link href={`/blog/${post.year}/${post.id}`}>
-                    <article>
-                      <h3>{post.title}</h3>
-                      <time dateTime={post.date}>
-                        {formatDate(post.date)}
-                      </time>
-                      {post.description && (
-                        <p>{post.description}</p>
-                      )}
-                    </article>
-                  </Link>
-                </li>
-              ))}
-          </ul>
+          <h2 className="content-year-heading">{year}</h2>
+          <table className="content-table">
+            <tbody>
+              {posts
+                .filter(post => post.year === year)
+                .map(post => (
+                  <tr key={post.id}>
+                    <td className="date-cell">
+                      {formatDate(post.date).split(' ')[0]} {/* Just month */}
+                      <br />
+                      {formatDate(post.date).split(' ')[1].replace(',', '')} {/* Just day number */}
+                    </td>
+                    <td className="content-cell">
+                      <Link href={`/blog/${post.year}/${post.id}`}>
+                        <h3>{post.title}</h3>
+                        {post.description && <p>{post.description}</p>}
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
         </section>
       ))}
     </MainLayout>

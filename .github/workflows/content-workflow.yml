@@ -1,0 +1,50 @@
+name: Content Workflow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'content/**'
+      - 'posts.json'
+      - 'projects.json'
+
+jobs:
+  validate-content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Validate content structure
+        run: node scripts/validate-content.js
+        
+  preview-deployment:
+    if: github.event_name == 'pull_request'
+    needs: validate-content
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Add PR comment with preview link
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { owner, repo, number } = context.issue;
+            const deploymentUrl = `https://${process.env.GITHUB_HEAD_REF}--tgedin-blog.vercel.app`;
+            
+            github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: number,
+              body: `## Preview Deployment\n\nYour changes can be previewed at: [${deploymentUrl}](${deploymentUrl})\n\nPlease check that your content appears correctly before merging.`
+            });
