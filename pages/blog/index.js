@@ -9,14 +9,18 @@ export default function Blog({ posts, years }) {
       <h1>Blog</h1>
       <p>Thoughts, tutorials, and insights.</p>
       
-      {years.map(year => (
-        <section key={year}>
-          <h2 className="content-year-heading">{year}</h2>
-          <table className="content-table">
-            <tbody>
-              {posts
-                .filter(post => post.year === year)
-                .map(post => (
+      {years.map(year => {
+        // Get posts for this year and sort by date (newest first)
+        const yearPosts = posts
+          .filter(post => post.year === year)
+          .sort((a, b) => new Date(b.date) - new Date(a.date));
+          
+        return (
+          <section key={year}>
+            <h2 className="content-year-heading">{year}</h2>
+            <table className="content-table">
+              <tbody>
+                {yearPosts.map(post => (
                   <tr key={post.id}>
                     <td className="date-cell">
                       {formatDate(post.date).split(' ')[0]} {/* Just month */}
@@ -31,10 +35,11 @@ export default function Blog({ posts, years }) {
                     </td>
                   </tr>
                 ))}
-            </tbody>
-          </table>
-        </section>
-      ))}
+              </tbody>
+            </table>
+          </section>
+        );
+      })}
     </MainLayout>
   );
 }
