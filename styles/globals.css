@@ -191,6 +191,18 @@ header nav {
   opacity: 0.8;
 }
 
+/* Footer credit for Claude */
+.footer-credit {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  opacity: 0.7;
+  margin-top: 0.75rem;
+}
+
+.assistant-credit {
+  font-style: italic;
+}
+
 /* Home Page */
 .home-container {
   padding: 2rem 0;
