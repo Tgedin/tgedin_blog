@@ -4,8 +4,8 @@ import ContactForm from '../components/ContactForm';
 
 export default function About() {
   const [imageError, setImageError] = useState(false);
-  // Web3Forms API key for the contact form
-  const web3FormsApiKey = "8f7111c2-0c4e-4b48-b18a-080302aaf287";
+  // Use environment variable instead of hardcoded key
+  const web3FormsApiKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
 
   return (
     <MainLayout 
