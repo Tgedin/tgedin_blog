@@ -835,3 +835,105 @@ img[src="/meritocracy-banner.webp"] {
 .read-more-link:hover {
   text-decoration: underline;
 }
+
+/* Contact Form Styling */
+.contact-form-container {
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background-color: var(--color-card-bg);
+  color: var(--color-text);
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1);
+}
+
+.form-button {
+  padding: 0.8rem 1.5rem;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  align-self: flex-start;
+  font-family: var(--font-mono); /* Add monospace font to button text */
+}
+
+.form-button:hover {
+  background-color: #0060df;
+  transform: translateY(-1px);
+}
+
+.form-button:active {
+  transform: translateY(0);
+}
+
+.form-button:disabled {
+  background-color: var(--color-muted);
+  cursor: not-allowed;
+}
+
+.form-note {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  margin-top: 0.5rem;
+}
+
+.form-error {
+  background-color: rgba(220, 38, 38, 0.1);
+  color: rgb(220, 38, 38);
+  padding: 1rem;
+  border-radius: 6px;
+  border-left: 3px solid rgb(220, 38, 38);
+  margin-bottom: 1rem;
+}
+
+.form-success {
+  text-align: center;
+  padding: 2rem;
+  background-color: rgba(0, 112, 243, 0.05);
+  border-radius: 8px;
+}
+
+.form-success h3 {
+  color: var(--color-primary);
+  margin-top: 0;
+}
+
+.form-success button {
+  margin-top: 1.5rem;
+}

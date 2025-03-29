@@ -1,8 +1,11 @@
 import MainLayout from '../layouts/MainLayout';
 import { useState } from 'react';
+import ContactForm from '../components/ContactForm';
 
 export default function About() {
   const [imageError, setImageError] = useState(false);
+  // Web3Forms API key for the contact form
+  const web3FormsApiKey = "8f7111c2-0c4e-4b48-b18a-080302aaf287";
 
   return (
     <MainLayout 
@@ -94,6 +97,14 @@ export default function About() {
           <p>
             If you're interested in reimagining how our foundational systems might better serve humanity, in using data and technology to create more effective and equitable approaches, I'd welcome a conversation. Together, we might build something that contributes meaningfully to the societal transformation that lies ahead.
           </p>
+        </section>
+        
+        <section className="about-section contact-section">
+          <h2>Get in Touch</h2>
+          <p>
+            Have an idea, opportunity, or just want to connect? I'm always open to interesting conversations and potential collaborations.
+          </p>
+          <ContactForm apiKey={web3FormsApiKey} />
         </section>
         
         <div className="profile-image-wrapper">

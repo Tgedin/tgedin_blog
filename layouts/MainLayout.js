@@ -52,6 +52,9 @@ export default function MainLayout({ children, title, description }) {
             <a href="https://github.com/Tgedin/tgedin_blog" className="footer-link" target="_blank" rel="noopener noreferrer">
               View on GitHub
             </a>
+            <a href="https://x.com/TheoGedin" className="footer-link" target="_blank" rel="noopener noreferrer">
+              Follow on X
+            </a>
           </div>
           <div className="copyright">
             &copy; 2025 Théo Gédin. All rights reserved.
