@@ -203,6 +203,13 @@ header nav {
   font-style: italic;
 }
 
+/* Copyright styling */
+.copyright {
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  color: var(--color-muted);
+}
+
 /* Home Page */
 .home-container {
   padding: 2rem 0;

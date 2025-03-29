@@ -53,8 +53,8 @@ export default function MainLayout({ children, title, description }) {
               View on GitHub
             </a>
           </div>
-          <div className="footer-credit">
-            <span className="assistant-credit">Layout and syntax refined with Claude 3.7 (favorite model so far)</span>
+          <div className="copyright">
+            &copy; 2025 Théo Gédin. All rights reserved.
           </div>
         </div>
       </footer>
