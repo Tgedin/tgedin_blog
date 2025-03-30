@@ -8,15 +8,5 @@
     "tags": ["data science", "machine learning", "education", "python"],
     "completed": false,
     "featured": true
-  },
-  {
-    "id": "tech-ecosystem-entry",
-    "title": "Entering the Tech Ecosystem",
-    "date": "2025-03-27",
-    "lastUpdated": "2025-03-28",
-    "description": "My journey from theoretical knowledge to practical application in the tech world",
-    "tags": ["career transition", "software development", "networking", "open source"],
-    "completed": false,
-    "featured": true
   }
 ]

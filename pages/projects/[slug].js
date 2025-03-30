@@ -1,9 +1,14 @@
 import { useRouter } from 'next/router';
-import Link from 'next/link'; // Added missing import
+import Link from 'next/link';
 import MainLayout from '../../layouts/MainLayout';
 import { getProjectBySlug, getAllProjects } from '../../lib/projects';
 import { formatDate } from '../../lib/date';
 import { MDXRemote } from 'next-mdx-remote';
+import BootcampSyllabus from '../../components/BootcampSyllabus';
+
+const components = {
+  BootcampSyllabus
+};
 
 export default function Project({ project }) {
   const router = useRouter();
@@ -56,7 +61,7 @@ export default function Project({ project }) {
         </header>
         
         <div className="project-content">
-          <MDXRemote {...content} />
+          <MDXRemote {...content} components={components} />
         </div>
         
         <div className="project-footer">
