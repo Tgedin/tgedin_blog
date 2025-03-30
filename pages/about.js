@@ -99,6 +99,28 @@ export default function About() {
           </p>
         </section>
         
+        {/* New CV/Resume Section */}
+        <section className="about-section cv-section">
+          <h2>Curriculum Vitae</h2>
+          <p>
+            My CV is available in multiple languages. Click below to download:
+          </p>
+          <div className="cv-buttons">
+            <a href="/theo-gedin-cv-en.pdf" className="cv-button" target="_blank" rel="noopener noreferrer">
+              <span className="cv-lang">English</span>
+              <span className="cv-download">Download CV</span>
+            </a>
+            <a href="/theo-gedin-cv-es.pdf" className="cv-button" target="_blank" rel="noopener noreferrer">
+              <span className="cv-lang">Español</span>
+              <span className="cv-download">Descargar CV</span>
+            </a>
+            <a href="/theo-gedin-cv-fr.pdf" className="cv-button" target="_blank" rel="noopener noreferrer">
+              <span className="cv-lang">Français</span>
+              <span className="cv-download">Télécharger CV</span>
+            </a>
+          </div>
+        </section>
+        
         <section className="about-section contact-section">
           <h2>Get in Touch</h2>
           <p>

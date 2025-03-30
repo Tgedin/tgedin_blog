@@ -937,3 +937,55 @@ img[src="/meritocracy-banner.webp"] {
 .form-success button {
   margin-top: 1.5rem;
 }
+
+/* CV Button Styling */
+.cv-section {
+  margin: 3rem 0;
+}
+
+.cv-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.cv-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  width: 180px;
+}
+
+.cv-button:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+}
+
+.cv-lang {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-headings);
+}
+
+.cv-download {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+}
+
+/* Responsive styling for CV buttons */
+@media (max-width: 640px) {
+  .cv-buttons {
+    justify-content: center;
+  }
+}

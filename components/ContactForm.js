@@ -1,6 +1,9 @@
 import { useState } from 'react';
 
 export default function ContactForm({ apiKey }) {
+  // Add this log at the start of your component to verify the key exists
+  console.log("API Key available:", !!apiKey);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
