@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 export default function Header() {
   const router = useRouter();
-  const [theme, setTheme] = useState('light'); // Default to light instead of system
+  const [theme, setTheme] = useState('dark'); // Default to dark instead of light
   
   // Helper function to check if a link is active
   const isActive = (path) => {
@@ -14,10 +14,10 @@ export default function Header() {
     return router.pathname.startsWith(path);
   };
   
-  // Initialize theme from localStorage or default to light
+  // Initialize theme from localStorage or default to dark
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // Get saved theme or default to light
+      // Get saved theme or default to dark
       const savedTheme = localStorage.getItem('theme');
       
       if (savedTheme) {
@@ -25,9 +25,9 @@ export default function Header() {
         setTheme(savedTheme);
         document.documentElement.setAttribute('data-theme', savedTheme);
       } else {
-        // Default to light theme if no preference is saved
-        setTheme('light');
-        document.documentElement.setAttribute('data-theme', 'light');
+        // Default to dark theme if no preference is saved
+        setTheme('dark');
+        document.documentElement.setAttribute('data-theme', 'dark');
       }
     }
   }, []);

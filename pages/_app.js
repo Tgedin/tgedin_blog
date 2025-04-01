@@ -7,12 +7,13 @@ function MyApp({ Component, pageProps }) {
     // Check for saved theme
     const savedTheme = localStorage.getItem('theme');
     
-    // Apply theme from localStorage or default to light mode
+    // Apply theme from localStorage or default to dark mode
     if (savedTheme) {
       document.documentElement.setAttribute('data-theme', savedTheme);
     } else {
-      // Default to light mode instead of using system preference
-      document.documentElement.setAttribute('data-theme', 'light');
+      // Default to dark mode
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
     }
   }, []);
   

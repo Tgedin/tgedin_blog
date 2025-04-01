@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Header from '../components/Header';
+import AnimatedBackground from '../components/AnimatedBackground';
 
 export default function MainLayout({ children, title, description }) {
   const siteTitle = title ? `${title} | Théo Gédin` : 'Théo Gédin | From Bricks to Bytes';
@@ -39,6 +40,8 @@ export default function MainLayout({ children, title, description }) {
           `}
         </script>
       </Head>
+      
+      <AnimatedBackground />
       
       <Header />
       

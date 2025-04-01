@@ -8,17 +8,17 @@
   /* Set primary font to monospace */
   --font-primary: var(--font-mono);
   
-  /* Light mode colors */
-  --color-bg: #FAFAFA;
-  --color-text: #333333;
-  --color-headings: #121212;
-  --color-primary: #0070F3;
-  --color-secondary: #6c757d;
-  --color-muted: #6c757d;
-  --color-border: #EAEAEA;
-  --color-card-bg: #FFFFFF;
-  --color-code-bg: #F1F1F1;
-  --color-blockquote-border: #E0E0E0;
+  /* Light mode colors - updated to beige/brown palette */
+  --color-bg: #F5F1E9;            /* Soft beige background */
+  --color-text: #433422;          /* Dark brown text */
+  --color-headings: #2D2315;      /* Darker brown headings */
+  --color-primary: #8B5A2B;       /* Warm brown primary */
+  --color-secondary: #7D6E5D;     /* Muted brown secondary */
+  --color-muted: #7D6E5D;         /* Same as secondary */
+  --color-border: #E6DED1;        /* Light tan border */
+  --color-card-bg: #FAF7F0;       /* Lighter beige card background */
+  --color-code-bg: #EFEAE0;       /* Slightly darker beige for code */
+  --color-blockquote-border: #D9CCBA; /* Medium tan for blockquotes */
 }
 
 /* Dark mode colors */
@@ -987,5 +987,22 @@ img[src="/meritocracy-banner.webp"] {
 @media (max-width: 640px) {
   .cv-buttons {
     justify-content: center;
+  }
+}
+
+/* Animated background responsiveness adjustments */
+@media (prefers-reduced-motion) {
+  .gradient-orb {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .animated-background {
+    opacity: 0.1 !important;
+  }
+  
+  .gradient-orb {
+    animation-duration: 30s !important;
   }
 }
