@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import MainLayout from './MainLayout';
-import ReadingProgress from '../components/ReadingProgress';
-import PostHeader from '../components/post/Header';
-import PostBody from '../components/post/Body';
-import PostContainer from '../components/post/Container';
+import { useEffect, useState } from "react";
+import MainLayout from "./MainLayout";
+import ReadingProgress from "../components/ReadingProgress";
+import PostHeader from "../components/post/Header";
+import PostBody from "../components/post/Body";
+import PostContainer from "../components/post/Container";
 
 // Function to estimate reading time
 const calculateReadingTime = (content) => {
@@ -21,10 +21,10 @@ export default function BlogPostLayout({ post }) {
   useEffect(() => {
     // Check if we have the required props
     if (!frontmatter || !content) {
-      setError('Post content or frontmatter is missing');
+      setError("Post content or frontmatter is missing");
       return;
     }
-    
+
     // Calculate reading time
     if (content && content.compiledSource) {
       const time = calculateReadingTime(content.compiledSource);
@@ -40,22 +40,30 @@ export default function BlogPostLayout({ post }) {
           <p>{error}</p>
           <div className="debug-info">
             <h2>Debug Information</h2>
-            <pre>{JSON.stringify({ year, slug, hasFrontmatter: !!frontmatter, hasContent: !!content }, null, 2)}</pre>
+            <pre>
+              {JSON.stringify(
+                {
+                  year,
+                  slug,
+                  hasFrontmatter: !!frontmatter,
+                  hasContent: !!content,
+                },
+                null,
+                2
+              )}
+            </pre>
           </div>
         </div>
       </MainLayout>
     );
   }
-  
+
   return (
-    <MainLayout
-      title={frontmatter.title}
-      description={frontmatter.description}
-    >
+    <MainLayout title={frontmatter.title} description={frontmatter.description}>
       <ReadingProgress />
-      
+
       <PostContainer>
-        <PostHeader 
+        <PostHeader
           title={frontmatter.title}
           date={frontmatter.date}
           tags={frontmatter.tags}
@@ -63,6 +71,14 @@ export default function BlogPostLayout({ post }) {
         />
         <PostBody content={content} />
       </PostContainer>
+
+      <style jsx>{`
+        /* Add custom styles to ensure headers don't stick */
+        :global(.post-header) {
+          position: static !important;
+          z-index: 1;
+        }
+      `}</style>
     </MainLayout>
   );
 }
