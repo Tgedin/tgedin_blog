@@ -581,7 +581,7 @@ export default function SkillsModule({ defaultCollapsed = true }) {
             ? "none"
             : "1px solid var(--color-border)"};
           background-color: var(--color-card-bg);
-          transition: background-color 0.2s ease;
+          transition: background-color 0.3s ease, border-bottom 0.3s ease;
         }
 
         .skills-toggle:hover {
@@ -605,29 +605,69 @@ export default function SkillsModule({ defaultCollapsed = true }) {
           cursor: pointer;
           padding: 0.5rem 0.75rem;
           border-radius: 4px;
-          transition: background-color 0.2s ease;
+          transition: background-color 0.2s ease, transform 0.3s ease;
         }
 
         .collapse-toggle:hover {
           background-color: rgba(var(--color-primary-rgb), 0.1);
+          transform: translateY(-1px);
+        }
+
+        .collapse-toggle span {
+          transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          display: inline-block;
+        }
+
+        .collapse-toggle:hover span {
+          transform: ${isCollapsed ? "translateY(2px)" : "translateY(-2px)"};
         }
 
         .collapsible-content {
-          max-height: ${isCollapsed
-            ? "0"
-            : "3000px"}; // Increased from 2000px to 3000px
-          overflow: ${isCollapsed
-            ? "hidden"
-            : "visible"}; // Allow overflow when expanded
-          transition: max-height 0.6s ease-in-out; // Slightly longer transition
+          max-height: ${isCollapsed ? "0" : "3000px"};
+          overflow: hidden;
+          transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+          opacity: ${isCollapsed ? "0" : "1"};
+          visibility: ${isCollapsed ? "hidden" : "visible"};
+          transform-origin: top;
+        }
+
+        /* Add a small delay before skills content appears */
+        .skills-content {
+          transition: opacity 0.4s ease, transform 0.4s ease;
+          opacity: ${isCollapsed ? "0" : "1"};
+          transform: ${isCollapsed ? "translateY(10px)" : "translateY(0)"};
+          transition-delay: ${isCollapsed ? "0s" : "0.2s"};
         }
 
         .skills-module.collapsed {
           box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+          transition: box-shadow 0.4s ease;
         }
 
         .skills-module.expanded {
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+          transition: box-shadow 0.4s ease;
+        }
+
+        /* Staggered animation for skills tabs */
+        .skills-tabs button {
+          transition: opacity 0.3s ease, transform 0.3s ease;
+          opacity: ${isCollapsed ? "0" : "1"};
+          transform: ${isCollapsed ? "translateY(10px)" : "translateY(0)"};
+        }
+
+        .skills-tabs button:nth-child(1) {
+          transition-delay: ${isCollapsed ? "0s" : "0.1s"};
+        }
+        .skills-tabs button:nth-child(2) {
+          transition-delay: ${isCollapsed ? "0s" : "0.15s"};
+        }
+        .skills-tabs button:nth-child(3) {
+          transition-delay: ${isCollapsed ? "0s" : "0.2s"};
+        }
+        .skills-tabs button:nth-child(4) {
+          transition-delay: ${isCollapsed ? "0s" : "0.25s"};
         }
       `}</style>
     </div>

@@ -4,6 +4,7 @@ import { getAllPosts } from "../lib/posts";
 import { getAllProjects } from "../lib/projects";
 import { formatDate } from "../lib/date";
 import SkillsModule from "../components/SkillsModule";
+import BricksToBytes from "../components/BricksToBytes";
 
 export default function Home({ recentPosts, projects }) {
   // Filter for featured projects
@@ -19,6 +20,11 @@ export default function Home({ recentPosts, projects }) {
         <p className="intro">
           Personal blog by <span itemProp="name">Théo Gédin</span>
         </p>
+
+        {/* Add the visualization component */}
+        <div className="transition-visual-container">
+          <BricksToBytes className="shadow-md" />
+        </div>
 
         {/* Featured Projects Section */}
         {featuredProjects.length > 0 && (
@@ -123,6 +129,14 @@ export default function Home({ recentPosts, projects }) {
           )}
         </section>
       </div>
+
+      <style jsx>{`
+        .transition-visual-container {
+          margin: 1.5rem auto 3rem;
+          max-width: 800px;
+          width: 100%;
+        }
+      `}</style>
     </MainLayout>
   );
 }

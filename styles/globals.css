@@ -33,22 +33,22 @@
   --color-bg-rgb: 245, 241, 233; /* RGB equivalent of #F5F1E9 */
 }
 
-/* Dark mode colors */
+/* Dark mode colors - updated with softer, warmer tones */
 [data-theme="dark"] {
-  --color-bg: #121212;
-  --color-text: rgba(255, 255, 255, 0.9);  /* Warmer text color */
-  --color-headings: #FFFFFF;
-  --color-primary: #6cb6ff;               /* More visible primary color */
-  --color-secondary: #A0A0A0;
-  --color-muted: #A0A0A0;
-  --color-border: #333333;
-  --color-card-bg: #1E1E1E;
-  --color-code-bg: #2D2D2D;
-  --color-blockquote-border: #444444;
+  --color-bg: #1e2030;             /* Softer blue-gray instead of near-black */
+  --color-text: rgba(235, 235, 245, 0.85); /* Softer white text */
+  --color-headings: #e4e4ef;       /* Slightly bluish white for headings */
+  --color-primary: #7ab6ff;        /* Lighter, softer blue */
+  --color-secondary: #b4b4c4;      /* Softer gray with hint of purple */
+  --color-muted: #9494a6;          /* Warmer muted text */
+  --color-border: #3d405b;         /* Dark blue-purple border */
+  --color-card-bg: #252942;        /* Slightly lighter than background */
+  --color-code-bg: #2d314f;        /* Code background with hint of blue */
+  --color-blockquote-border: #4e5377; /* Softer border color */
   
   /* RGB versions for rgba use */
-  --color-primary-rgb: 108, 182, 255; /* RGB equivalent of #6cb6ff */
-  --color-bg-rgb: 18, 18, 18; /* RGB equivalent of #121212 */
+  --color-primary-rgb: 122, 182, 255; /* RGB equivalent of #7ab6ff */
+  --color-bg-rgb: 30, 32, 48;       /* RGB equivalent of #1e2030 */
 }
 
 /* Base styles */
@@ -210,6 +210,19 @@ header nav {
 .theme-toggle:hover::after {
   opacity: 1;
   visibility: visible;
+}
+
+/* Theme toggle enhancement for minimalist style */
+.theme-toggle svg {
+  transition: stroke 0.2s ease;
+}
+
+[data-theme="dark"] .theme-toggle {
+  color: var(--color-muted);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  color: var(--color-primary);
 }
 
 /* Footer */
@@ -1261,4 +1274,18 @@ img[src="/meritocracy-banner.webp"] {
 .skills-phase {
   height: auto;
   overflow: visible;
+}
+
+/* Adjust card hover states for dark mode */
+[data-theme="dark"] .skill-card:hover,
+[data-theme="dark"] .latest-post:hover {
+  box-shadow: 0 5px 20px rgba(122, 182, 255, 0.15);
+}
+
+/* Add subtle texture to dark mode background */
+[data-theme="dark"] .background-container {
+  background-image: 
+    linear-gradient(to right, rgba(122, 182, 255, 0.03), transparent 30%, rgba(122, 182, 255, 0.03)),
+    linear-gradient(to bottom, rgba(122, 182, 255, 0.03), transparent 30%, rgba(122, 182, 255, 0.03));
+  opacity: 0.15;
 }
