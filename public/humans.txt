@@ -1,0 +1,11 @@
+/* TEAM */
+	Creator: Théo Gédin
+	Twitter: @TheoGedin
+	From: Valencia, Spain
+	
+/* SITE */
+	Last update: 2025
+	Language: English
+	Doctype: HTML5
+	Technologies: Next.js, React, MDX, JavaScript
+	Tools: VS Code, Git

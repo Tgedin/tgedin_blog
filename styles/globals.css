@@ -1289,3 +1289,12 @@ img[src="/meritocracy-banner.webp"] {
     linear-gradient(to bottom, rgba(122, 182, 255, 0.03), transparent 30%, rgba(122, 182, 255, 0.03));
   opacity: 0.15;
 }
+
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  z-index: 1000;
+}

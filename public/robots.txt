@@ -1,4 +1,19 @@
+# robots.txt for tgedin.dev
+
 User-agent: *
 Allow: /
 
+# Disallow admin or development pages
+Disallow: /debug
+Disallow: /image-debug
+Disallow: /admin/
+
+# Sitemaps
 Sitemap: https://tgedin.dev/sitemap.xml
+
+# Crawl delay for intensive bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
