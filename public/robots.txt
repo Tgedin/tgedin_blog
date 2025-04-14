@@ -3,10 +3,9 @@
 User-agent: *
 Allow: /
 
-# Disallow admin or development pages
+# Disallow development pages
 Disallow: /debug
 Disallow: /image-debug
-Disallow: /admin/
 
 # Sitemaps
 Sitemap: https://tgedin.dev/sitemap.xml
