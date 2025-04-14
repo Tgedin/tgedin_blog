@@ -288,7 +288,7 @@ header nav {
   font-size: 3rem;
   margin-bottom: 1rem;
   font-weight: 700;
-  color: var(--color-headings);
+  color: var (--color-headings);
 }
 
 .intro {
@@ -1290,11 +1290,4 @@ img[src="/meritocracy-banner.webp"] {
   opacity: 0.15;
 }
 
-  align-items: center;
-  justify-content: center;
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-primary);
-  font-size: 1.2rem;
-  z-index: 1000;
-}
+/* You can add any new styles below this line */
