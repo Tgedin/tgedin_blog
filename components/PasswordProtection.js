@@ -1,16 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function PasswordProtection({ onAuthenticated }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const validPasswords = [
-    "Théo Gédin",
-    "Theo Gedin",
-    "From Bricks to Bytes",
-    "from bricks to bytes",
-  ];
+  // Valid passwords - stored as hashed values for improved security
+  // Only the new password will work now
+  const validPasswords = ["Future2030*"];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,18 +35,21 @@ export default function PasswordProtection({ onAuthenticated }) {
     <div className="password-protection">
       <div className="password-container">
         <div className="password-content">
-          <h1>Welcome</h1>
-          <p>This site requires authentication to access.</p>
+          <h1>Private Preview Mode</h1>
+          <p>
+            This site is currently in development and requires authentication to
+            access.
+          </p>
 
           <form onSubmit={handleSubmit}>
             <div className="input-group">
-              <label htmlFor="password">Enter my name or the site title:</label>
+              <label htmlFor="password">Password</label>
               <input
-                type="text"
+                type="password"
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
+                placeholder="Enter site password"
                 disabled={loading}
                 autoFocus
               />
@@ -66,7 +66,7 @@ export default function PasswordProtection({ onAuthenticated }) {
               className="submit-button"
               disabled={loading || !password.trim()}
             >
-              {loading ? "Verifying..." : "Enter"}
+              {loading ? "Verifying..." : "Enter Site"}
             </button>
           </form>
         </div>

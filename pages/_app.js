@@ -5,7 +5,7 @@ import PasswordProtection from "../components/PasswordProtection";
 function MyApp({ Component, pageProps }) {
   const [isAuthenticated, setIsAuthenticated] = useState(true); // Default to true for public mode
   const [checkingAuth, setCheckingAuth] = useState(true);
-  const [isProtectionEnabled, setIsProtectionEnabled] = useState(false); // Add this flag
+  const [isProtectionEnabled, setIsProtectionEnabled] = useState(false);
 
   // Check if protection is enabled and if user is already authenticated
   useEffect(() => {
