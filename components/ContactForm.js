@@ -80,7 +80,7 @@ export default function ContactForm({ apiKey }) {
         <div className="form-success">
           <h3>Message sent!</h3>
           <p>
-            Thank you for reaching out. I'll get back to you as soon as
+            Thank you for reaching out. I&apos;ll get back to you as soon as
             possible.
           </p>
           <button

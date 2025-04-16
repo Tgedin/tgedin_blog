@@ -235,7 +235,7 @@ export default function SkillsModule({ defaultCollapsed = true }) {
               aria-labelledby="phase2-tab"
             >
               <p className="phase-description">
-                After establishing core competencies, I'm exploring these
+                After establishing core competencies, I&apos;m exploring these
                 specialized areas to build more advanced capabilities.
               </p>
 
@@ -421,8 +421,8 @@ export default function SkillsModule({ defaultCollapsed = true }) {
               aria-labelledby="roadmap-tab"
             >
               <p className="phase-description">
-                Looking ahead, I'm planning to explore these areas to expand my
-                capabilities and tackle more complex data problems.
+                Looking ahead, I&apos;m planning to explore these areas to
+                expand my capabilities and tackle more complex data problems.
               </p>
 
               <div className="skills-grid">

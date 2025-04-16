@@ -248,6 +248,10 @@ export default function About() {
             Have an idea, opportunity, or just want to connect? I&apos;m always
             open to interesting conversations and potential collaborations.
           </p>
+          <p>
+            Thank you for reaching out. I&apos;ll get back to you as soon as
+            possible.
+          </p>
           <ContactForm apiKey={web3FormsApiKey} />
         </section>
 
