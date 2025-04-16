@@ -8,72 +8,38 @@ import ReadingProgress from "../components/ReadingProgress";
 export default function BlogPostLayout({ post, components }) {
   const contentRef = useRef(null);
 
-  console.log("BlogPostLayout received:", {
-    hasPost: !!post,
-    postId: post?.id,
-    hasFrontMatter: !!post?.frontMatter,
-    hasMdxSource: !!post?.mdxSource,
-  });
-
-  // Safe guard against missing data
-  if (!post) {
-    return (
-      <MainLayout title="Error" description="Error loading blog post">
-        <div className="error-container">
-          <h1>Error Loading Post</h1>
-          <p>Could not load post data. Please try again later.</p>
-        </div>
-      </MainLayout>
-    );
-  }
-
-  // Handle case when frontMatter is missing
-  if (!post.frontMatter) {
-    return (
-      <MainLayout title="Error" description="Error with post metadata">
-        <div className="error-container">
-          <h1>Error Loading Post</h1>
-          <p>Post metadata could not be loaded.</p>
-          <div className="debug-info">
-            <h2>Debug Information</h2>
-            <pre>{JSON.stringify(post, null, 2)}</pre>
-          </div>
-        </div>
-      </MainLayout>
-    );
-  }
+  // Simple fallback for missing data
+  const title = post?.frontMatter?.title || "Blog Post";
+  const description = post?.frontMatter?.description || "";
+  const date = post?.frontMatter?.date || null;
+  const tags = post?.frontMatter?.tags || [];
+  const readingTime = post?.frontMatter?.readingTime || null;
 
   return (
-    <MainLayout
-      title={post.frontMatter.title || "Blog Post"}
-      description={post.frontMatter.description || ""}
-    >
+    <MainLayout title={title} description={description}>
       <ReadingProgress target={contentRef} />
       <PostContainer>
         <div ref={contentRef} className="blog-post">
           <PostHeader
-            title={post.frontMatter.title}
-            date={post.frontMatter.date}
-            tags={post.frontMatter.tags}
-            readingTime={post.frontMatter.readingTime}
+            title={title}
+            date={date}
+            tags={tags}
+            readingTime={readingTime}
           />
-          <PostBody content={post.mdxSource} components={components} />
+          {post?.mdxSource ? (
+            <PostBody content={post.mdxSource} components={components} />
+          ) : (
+            <div className="error-message">Content unavailable</div>
+          )}
         </div>
       </PostContainer>
 
       <style jsx>{`
-        .error-container {
-          max-width: 800px;
-          margin: 2rem auto;
+        .error-message {
           padding: 1rem;
-        }
-
-        .debug-info {
-          margin-top: 2rem;
-          padding: 1rem;
-          background: #f5f5f5;
-          border-radius: 8px;
-          overflow: auto;
+          background-color: #fff5f5;
+          border-left: 4px solid #f56565;
+          margin: 1rem 0;
         }
 
         .blog-post {
