@@ -53,16 +53,10 @@ const nextConfig = {
       },
     ];
   },
-  // Add this to disable the strict mode in development which can help with hydration issues
-  compiler: {
-    // Enables the styled-components SWC transform
-    styledComponents: true,
-  },
-  // Important for MDX hydration issues
-  webpack: (config, { dev, isServer }) => {
-    // Handle MDX better - this can help with entity encoding consistency
+  // Remove the compiler options to use the default React JSX transform
+  webpack: (config) => {
+    // Only keep the essential config
     config.resolve.fallback = { fs: false };
-
     return config;
   },
 };
