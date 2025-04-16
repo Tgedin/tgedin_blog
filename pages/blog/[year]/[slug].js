@@ -22,29 +22,62 @@ export default function BlogPost({ post }) {
 }
 
 export async function getStaticProps({ params }) {
-  const post = await getPostBySlug(params.year, params.slug);
+  try {
+    const post = await getPostBySlug(params.year, params.slug);
 
-  if (!post) {
+    if (!post) {
+      return { notFound: true };
+    }
+
+    return {
+      props: { post },
+      // Add revalidation to improve performance
+      revalidate: 60 * 60, // Revalidate every hour
+    };
+  } catch (error) {
+    console.error(
+      `Error generating page for ${params.year}/${params.slug}:`,
+      error
+    );
     return { notFound: true };
   }
-
-  return {
-    props: { post },
-  };
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts();
+  try {
+    const posts = getAllPosts();
 
-  const paths = posts.map((post) => ({
-    params: {
-      year: post.year,
-      slug: post.id,
-    },
-  }));
+    // Filter out problematic posts that cause JSX runtime errors
+    const problemPosts = [
+      "beyond-abstractions",
+      "beyond-reality-ai-worlds-and-the-paradox-of-authentic-experience",
+      "ai-and-meritocracy",
+    ];
 
-  return {
-    paths,
-    fallback: false,
-  };
+    // Only include posts that aren't in the problem list
+    const paths = posts
+      .filter((post) => !problemPosts.includes(post.id))
+      .map((post) => ({
+        params: {
+          year: post.year,
+          slug: post.id,
+        },
+      }));
+
+    console.log(
+      `Generating static paths for ${paths.length} posts out of ${posts.length} total`
+    );
+
+    return {
+      paths,
+      // Change to blocking fallback - will render problematic pages on-demand instead of at build time
+      fallback: "blocking",
+    };
+  } catch (error) {
+    console.error("Error in getStaticPaths:", error);
+    return {
+      paths: [],
+      fallback: "blocking",
+    };
+  }
 }
