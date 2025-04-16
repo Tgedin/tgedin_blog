@@ -5,6 +5,7 @@ import { getAllProjects } from "../lib/projects";
 import { formatDate } from "../lib/date";
 import SkillsModule from "../components/SkillsModule";
 import BricksToBytes from "../components/BricksToBytes";
+import PostCard from "../components/post/PostCard";
 
 export default function Home({ recentPosts, projects }) {
   // Filter for featured projects
@@ -82,39 +83,7 @@ export default function Home({ recentPosts, projects }) {
 
           {latestPost ? (
             <>
-              <div className="latest-post">
-                <div className="latest-post-meta">
-                  <time dateTime={latestPost.date}>
-                    {formatDate(latestPost.date)}
-                  </time>
-                  {latestPost.tags && latestPost.tags.length > 0 && (
-                    <div className="latest-post-tags">
-                      {latestPost.tags.map((tag) => (
-                        <span key={tag} className="latest-post-tag">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                <Link href={`/blog/${latestPost.year}/${latestPost.id}`}>
-                  <h3 className="latest-post-title">{latestPost.title}</h3>
-                </Link>
-
-                {latestPost.description && (
-                  <p className="latest-post-description">
-                    {latestPost.description}
-                  </p>
-                )}
-
-                <Link
-                  href={`/blog/${latestPost.year}/${latestPost.id}`}
-                  className="read-more-link"
-                >
-                  Read article →
-                </Link>
-              </div>
+              <PostCard post={latestPost} featured={true} />
 
               <div className="view-all">
                 <Link href="/blog" className="view-all-link">

@@ -1,57 +1,74 @@
-import Link from 'next/link';
-import MainLayout from '../../layouts/MainLayout';
-import { getAllPosts, getAllYears } from '../../lib/posts';
-import { formatDate } from '../../lib/date';
+import MainLayout from "../../layouts/MainLayout";
+import { getAllPosts } from "../../lib/posts";
+import PostCard from "../../components/post/PostCard";
 
-export default function Blog({ posts, years }) {
+export default function Blog({ posts }) {
   return (
-    <MainLayout title="Blog" description="Articles on technology, development, data science, and more">
-      <h1>Blog</h1>
-      <p>Thoughts, tutorials, and insights.</p>
-      
-      {years.map(year => {
-        // Get posts for this year and sort by date (newest first)
-        const yearPosts = posts
-          .filter(post => post.year === year)
-          .sort((a, b) => new Date(b.date) - new Date(a.date));
-          
-        return (
-          <section key={year}>
-            <h2 className="content-year-heading">{year}</h2>
-            <table className="content-table">
-              <tbody>
-                {yearPosts.map(post => (
-                  <tr key={post.id}>
-                    <td className="date-cell">
-                      {formatDate(post.date).split(' ')[0]} {/* Just month */}
-                      <br />
-                      {formatDate(post.date).split(' ')[1].replace(',', '')} {/* Just day number */}
-                    </td>
-                    <td className="content-cell">
-                      <Link href={`/blog/${post.year}/${post.id}`}>
-                        <h3>{post.title}</h3>
-                        {post.description && <p>{post.description}</p>}
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+    <MainLayout
+      title="Blog"
+      description="Articles on data science, programming, and civil engineering"
+    >
+      <div className="blog-container">
+        <h1>Blog</h1>
+
+        {posts.length > 0 ? (
+          // Use a structure similar to the landing page's featured section
+          <section className="posts-section">
+            {posts.map((post) => (
+              <PostCard
+                key={`${post.year}-${post.id}`}
+                post={post}
+                featured={true} // Apply featured layout to all cards
+              />
+            ))}
           </section>
-        );
-      })}
+        ) : (
+          <div className="empty-state">
+            <p>No posts published yet. Check back soon!</p>
+          </div>
+        )}
+      </div>
+
+      <style jsx>{`
+        .blog-container {
+          /* Use content-width like featured-section */
+          max-width: var(--content-width);
+          margin: 0 auto;
+          padding: 2rem 1rem;
+        }
+
+        h1 {
+          /* Match featured-heading style */
+          font-size: 1.75rem;
+          margin-bottom: 1.5rem;
+          padding-bottom: 0.5rem;
+          border-bottom: 2px solid var(--color-border);
+          text-align: left;
+        }
+
+        .posts-section {
+          /* Container for the featured-style cards */
+          display: flex;
+          flex-direction: column;
+          gap: 2rem; /* Keep the gap between cards */
+        }
+
+        .empty-state {
+          text-align: center;
+          padding: 3rem 0;
+          color: var(--color-text-secondary);
+        }
+      `}</style>
     </MainLayout>
   );
 }
 
 export async function getStaticProps() {
   const posts = getAllPosts();
-  const years = getAllYears();
-  
+
   return {
     props: {
       posts,
-      years,
     },
   };
 }
