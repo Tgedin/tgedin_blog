@@ -1,57 +1,42 @@
-import { useEffect, useState } from "react";
+import React, { useRef } from "react";
 import MainLayout from "./MainLayout";
-import ReadingProgress from "../components/ReadingProgress";
 import PostHeader from "../components/post/Header";
 import PostBody from "../components/post/Body";
 import PostContainer from "../components/post/Container";
+import ReadingProgress from "../components/ReadingProgress";
 
-// Function to estimate reading time
-const calculateReadingTime = (content) => {
-  // Assuming an average reading speed of 200 words per minute
-  const wordsPerMinute = 200;
-  const wordCount = content.split(/\s+/).length;
-  return Math.ceil(wordCount / wordsPerMinute);
-};
+export default function BlogPostLayout({ post, components }) {
+  const contentRef = useRef(null);
 
-export default function BlogPostLayout({ post }) {
-  const { frontmatter, content, year, slug } = post;
-  const [error, setError] = useState(null);
-  const [readingTime, setReadingTime] = useState(0);
+  console.log("BlogPostLayout received:", {
+    hasPost: !!post,
+    postId: post?.id,
+    hasFrontMatter: !!post?.frontMatter,
+    hasMdxSource: !!post?.mdxSource,
+  });
 
-  useEffect(() => {
-    // Check if we have the required props
-    if (!frontmatter || !content) {
-      setError("Post content or frontmatter is missing");
-      return;
-    }
-
-    // Calculate reading time
-    if (content && content.compiledSource) {
-      const time = calculateReadingTime(content.compiledSource);
-      setReadingTime(time);
-    }
-  }, [frontmatter, content]);
-
-  if (error) {
+  // Safe guard against missing data
+  if (!post) {
     return (
       <MainLayout title="Error" description="Error loading blog post">
         <div className="error-container">
           <h1>Error Loading Post</h1>
-          <p>{error}</p>
+          <p>Could not load post data. Please try again later.</p>
+        </div>
+      </MainLayout>
+    );
+  }
+
+  // Handle case when frontMatter is missing
+  if (!post.frontMatter) {
+    return (
+      <MainLayout title="Error" description="Error with post metadata">
+        <div className="error-container">
+          <h1>Error Loading Post</h1>
+          <p>Post metadata could not be loaded.</p>
           <div className="debug-info">
             <h2>Debug Information</h2>
-            <pre>
-              {JSON.stringify(
-                {
-                  year,
-                  slug,
-                  hasFrontmatter: !!frontmatter,
-                  hasContent: !!content,
-                },
-                null,
-                2
-              )}
-            </pre>
+            <pre>{JSON.stringify(post, null, 2)}</pre>
           </div>
         </div>
       </MainLayout>
@@ -59,24 +44,40 @@ export default function BlogPostLayout({ post }) {
   }
 
   return (
-    <MainLayout title={frontmatter.title} description={frontmatter.description}>
-      <ReadingProgress />
-
+    <MainLayout
+      title={post.frontMatter.title || "Blog Post"}
+      description={post.frontMatter.description || ""}
+    >
+      <ReadingProgress target={contentRef} />
       <PostContainer>
-        <PostHeader
-          title={frontmatter.title}
-          date={frontmatter.date}
-          tags={frontmatter.tags}
-          readingTime={readingTime}
-        />
-        <PostBody content={content} />
+        <div ref={contentRef} className="blog-post">
+          <PostHeader
+            title={post.frontMatter.title}
+            date={post.frontMatter.date}
+            tags={post.frontMatter.tags}
+            readingTime={post.frontMatter.readingTime}
+          />
+          <PostBody content={post.mdxSource} components={components} />
+        </div>
       </PostContainer>
 
       <style jsx>{`
-        /* Add custom styles to ensure headers don't stick */
-        :global(.post-header) {
-          position: static !important;
-          z-index: 1;
+        .error-container {
+          max-width: 800px;
+          margin: 2rem auto;
+          padding: 1rem;
+        }
+
+        .debug-info {
+          margin-top: 2rem;
+          padding: 1rem;
+          background: #f5f5f5;
+          border-radius: 8px;
+          overflow: auto;
+        }
+
+        .blog-post {
+          width: 100%;
         }
       `}</style>
     </MainLayout>
