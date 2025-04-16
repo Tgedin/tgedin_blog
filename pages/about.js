@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import MainLayout from "../layouts/MainLayout";
 import { useState } from "react";
 import ContactForm from "../components/ContactForm";
