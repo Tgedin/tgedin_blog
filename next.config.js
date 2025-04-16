@@ -2,21 +2,57 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['images.unsplash.com'],
-    formats: ['image/webp'], // Prioritize WebP format
+    domains: ["images.unsplash.com"],
+    formats: ["image/webp"], // Prioritize WebP format
     deviceSizes: [640, 750, 828, 1080, 1200, 1920], // Define responsive breakpoints
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384], // Define image sizes for better optimization
   },
-  pageExtensions: ['js', 'jsx', 'md', 'mdx'],
+  pageExtensions: ["js", "jsx", "md", "mdx"],
   // Add this to properly handle image paths from content
   async rewrites() {
     return [
       {
-        source: '/content/:path*',
-        destination: '/api/content/:path*',
+        source: "/content/:path*",
+        destination: "/api/content/:path*",
       },
     ];
   },
-}
+  // Add server-side caching through response headers
+  async headers() {
+    return [
+      {
+        source: "/blog/:year/:slug",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=60, s-maxage=600, stale-while-revalidate=600",
+          },
+        ],
+      },
+      {
+        source: "/projects/:slug",
+        headers: [
+          {
+            key: "Cache-Control",
+            value:
+              "public, max-age=60, s-maxage=600, stale-while-revalidate=600",
+          },
+        ],
+      },
+      {
+        source: "/api/content/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            // Add s-maxage for better CDN caching on Vercel's edge network
+            value:
+              "public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400",
+          },
+        ],
+      },
+    ];
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
