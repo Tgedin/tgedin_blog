@@ -1,14 +1,17 @@
 import MainLayout from "../layouts/MainLayout";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 export default function ImageDebug() {
   const [imageStatuses, setImageStatuses] = useState({});
-  const imagesToTest = [
-    { name: "Crossing WebP", src: "/at_the_crossing.webp" },
-    { name: "Crossing JPG", src: "/at_the_crossing.jpg" },
-    { name: "Profile WebP", src: "/profile_pic.webp" },
-    { name: "Profile JPEG", src: "/profile_pic.jpeg" },
-  ];
+  const imagesToTest = useMemo(
+    () => [
+      { name: "Crossing WebP", src: "/at_the_crossing.webp" },
+      { name: "Crossing JPG", src: "/at_the_crossing.jpg" },
+      { name: "Profile WebP", src: "/profile_pic.webp" },
+      { name: "Profile JPEG", src: "/profile_pic.jpeg" },
+    ],
+    []
+  );
 
   const testImage = (name, src) => {
     const img = new Image();
