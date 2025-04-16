@@ -249,7 +249,7 @@ export default function About() {
             open to interesting conversations and potential collaborations.
           </p>
           <p>
-            Thank you for reaching out. I&#39;ll get back to you as soon as
+            Thank you for reaching out. I'll get back to you as soon as
             possible.
           </p>
           <ContactForm apiKey={web3FormsApiKey} />
