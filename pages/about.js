@@ -16,9 +16,9 @@ export default function About() {
       <div className="about-container">
         <h1>About Me</h1>
         <p className="about-intro">
-          At the intersection of building and analysis, I'm driven by a passion
-          to create tangible solutions for our society's most pressing
-          challenges.
+          At the intersection of building and analysis, I&apos;m driven by a
+          passion to create tangible solutions for our society&apos;s most
+          pressing challenges.
         </p>
 
         <div className="crossroads-image-container">
@@ -61,17 +61,18 @@ export default function About() {
           </p>
           <p>
             This urban disconnect was what initially propelled me toward change,
-            but my vision has since expanded far beyond city planning. I've come
-            to recognize similar patterns of inefficiency and untapped potential
-            across education, industry, economy, and finance—all sectors poised
-            for revolutionary transformation in the coming years. Currently, I'm
-            expanding my capabilities at 4Geeks Academy in Valencia, Spain,
-            where I'm immersing myself in data science and machine learning as
-            practical tools to participate in this broader societal reshaping.
+            but my vision has since expanded far beyond city planning. I&apos;ve
+            come to recognize similar patterns of inefficiency and untapped
+            potential across education, industry, economy, and finance—all
+            sectors poised for revolutionary transformation in the coming years.
+            Currently, I&apos;m expanding my capabilities at 4Geeks Academy in
+            Valencia, Spain, where I&apos;m immersing myself in data science and
+            machine learning as practical tools to participate in this broader
+            societal reshaping.
           </p>
           <p>
-            I've made Valencia my home, living with my Spanish girlfriend and
-            experiencing firsthand how different approaches to community
+            I&apos;ve made Valencia my home, living with my Spanish girlfriend
+            and experiencing firsthand how different approaches to community
             building and social organization can create vastly different
             outcomes—providing me with constant inspiration and a comparative
             lens through which to view systemic challenges.
@@ -81,14 +82,14 @@ export default function About() {
         <section className="about-section">
           <h2>What Drives Me</h2>
           <p>
-            While urban planning challenges first opened my eyes, I'm now
+            While urban planning challenges first opened my eyes, I&apos;m now
             fundamentally driven by the extraordinary moment of transformation
-            we're entering across multiple domains. The next years will be
-            pivotal for reshaping our societies, and I'm eager to contribute to
-            this evolution through practical solution-building. The patterns I
-            recognized in urban environments—systems that fail to serve human
-            needs effectively—are equally present in how we approach education,
-            organize our economy, and structure our industries.
+            we&apos;re entering across multiple domains. The next years will be
+            pivotal for reshaping our societies, and I&apos;m eager to
+            contribute to this evolution through practical solution-building.
+            The patterns I recognized in urban environments—systems that fail to
+            serve human needs effectively—are equally present in how we approach
+            education, organize our economy, and structure our industries.
           </p>
           <p>I'm particularly interested in:</p>
           <ul>
@@ -120,8 +121,8 @@ export default function About() {
             prototypes and initial solutions independently. This initial
             self-reliance is particularly valuable in innovation, where
             understanding both human elements and technical systems is essential
-            for creating meaningful change. However, I've observed that truly
-            transformative projects flourish at the intersection of
+            for creating meaningful change. However, I&apos;ve observed that
+            truly transformative projects flourish at the intersection of
             complementary skills and diverse perspectives. While the journey may
             begin with individual initiative and proof-of-concept work, the most
             impactful solutions emerge when founding ideas encounter different
@@ -142,25 +143,26 @@ export default function About() {
         <section className="about-section">
           <h2>Looking Forward</h2>
           <p>
-            I'm actively seeking opportunities to build solutions that catalyze
-            positive transformation across various domains. Whether that means
-            founding a venture from scratch or joining an early-stage team where
-            I can apply both my understanding of systemic challenges and my
-            technical skills, I'm ready to move from observation to creation.
+            I&apos;m actively seeking opportunities to build solutions that
+            catalyze positive transformation across various domains. Whether
+            that means founding a venture from scratch or joining an early-stage
+            team where I can apply both my understanding of systemic challenges
+            and my technical skills, I&apos;m ready to move from observation to
+            creation.
           </p>
           <p>
             As we stand at the threshold of potentially revolutionary changes in
             education, industry, economy, and urban development, I believe the
             coming years offer unprecedented opportunities to reshape our
-            societies for the better. I'm committed to being an active
+            societies for the better. I&apos;m committed to being an active
             participant in this transformation rather than a mere observer.
           </p>
           <p>
-            If you're interested in reimagining how our foundational systems
-            might better serve humanity, in using data and technology to create
-            more effective and equitable approaches, I'd welcome a conversation.
-            Together, we might build something that contributes meaningfully to
-            the societal transformation that lies ahead.
+            If you&apos;re interested in reimagining how our foundational
+            systems might better serve humanity, in using data and technology to
+            create more effective and equitable approaches, I&apos;d welcome a
+            conversation. Together, we might build something that contributes
+            meaningfully to the societal transformation that lies ahead.
           </p>
         </section>
 
@@ -207,10 +209,10 @@ export default function About() {
           <div className="substack-container">
             <div className="substack-content">
               <p className="substack-description">
-                What if our housing crisis isn't a resource problem, but an
+                What if our housing crisis isn&apos;t a resource problem, but an
                 information one? Weekly explorations from an engineer with a
-                poet's heart - mixing technical deep dives with philosophical
-                musings on how we build our world.
+                poet&apos;s heart - mixing technical deep dives with
+                philosophical musings on how we build our world.
               </p>
               <a
                 href="https://theogedin.substack.com/"
@@ -243,8 +245,8 @@ export default function About() {
         <section className="about-section contact-section">
           <h2>Get in Touch</h2>
           <p>
-            Have an idea, opportunity, or just want to connect? I'm always open
-            to interesting conversations and potential collaborations.
+            Have an idea, opportunity, or just want to connect? I&apos;m always
+            open to interesting conversations and potential collaborations.
           </p>
           <ContactForm apiKey={web3FormsApiKey} />
         </section>
