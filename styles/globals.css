@@ -519,6 +519,22 @@ code {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
+/* Enhanced Blog Post Image Styling - Applied globally to all first images in blog posts */
+.blog-post img:first-of-type {
+  display: block;
+  margin: 2.5rem auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;  /* More rounded corners */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);  /* Enhanced shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-post img:first-of-type:hover {
+  transform: scale(1.01);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
 /* Add specific styling for the meritocracy banner */
 img[src="/meritocracy-banner.webp"] {
   width: 100%;
