@@ -93,6 +93,8 @@ export async function getStaticProps({ params }) {
     props: {
       project,
     },
+    // Add revalidation period (in seconds)
+    revalidate: 3600, // Revalidate every hour
   };
 }
 

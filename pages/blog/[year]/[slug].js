@@ -24,6 +24,18 @@ export default function BlogPost({ post, rawContent, frontMatter }) {
 
   // If we have raw content but the post failed to process (problematic posts)
   if (!post && (rawContent || frontMatter)) {
+    // Only show the image if it is NOT the same as the first image in the markdown content
+    let showFrontMatterImage = true;
+    let firstMarkdownImage = null;
+    if (rawContent) {
+      const match = rawContent.match(/!\[.*?\]\((.*?)\)/);
+      if (match && match[1] && frontMatter?.image) {
+        firstMarkdownImage = match[1];
+        if (firstMarkdownImage === frontMatter.image) {
+          showFrontMatterImage = false;
+        }
+      }
+    }
     return (
       <MainLayout
         title={frontMatter?.title || "Blog Post"}
@@ -55,7 +67,7 @@ export default function BlogPost({ post, rawContent, frontMatter }) {
               </div>
             </header>
 
-            {frontMatter?.image && (
+            {showFrontMatterImage && frontMatter?.image && (
               <div className="featured-image-container">
                 <img
                   src={frontMatter.image}
@@ -122,8 +134,14 @@ export default function BlogPost({ post, rawContent, frontMatter }) {
 function processRawContent(content) {
   if (!content) return "";
 
-  // Remove frontmatter section
-  let processedContent = content.replace(/^---[\s\S]*?---/, "");
+  // Remove frontmatter section (robust to all whitespace/newlines after ---)
+  let processedContent = content.replace(
+    /^---[\s\S]*?---[\r\n\u2028\u2029]*/u,
+    ""
+  );
+
+  // Remove leading/trailing whitespace (including unicode)
+  processedContent = processedContent.replace(/^[\s\u00A0]+|[\s\u00A0]+$/g, "");
 
   // Convert markdown headings
   processedContent = processedContent.replace(/^## (.*$)/gim, "<h2>$1</h2>");
@@ -141,11 +159,16 @@ function processRawContent(content) {
     '<a href="$2">$1</a>'
   );
 
-  // Convert paragraphs (simplistic approach - assumes paragraphs are separated by blank lines)
-  processedContent = processedContent.replace(
-    /^(?!<[h|i|u]|$)(.+)$/gim,
-    "<p>$1</p>"
-  );
+  // Split into lines and wrap non-empty, non-HTML lines in <p>
+  processedContent = processedContent
+    .split(/\r?\n/)
+    .map((line) => {
+      const trimmed = line.trim();
+      if (!trimmed) return "";
+      if (/^<.*?>/.test(trimmed)) return trimmed;
+      return `<p>${trimmed}</p>`;
+    })
+    .join("\n");
 
   return processedContent;
 }
@@ -154,12 +177,15 @@ export async function getStaticProps({ params }) {
   try {
     // For problematic posts, get raw content instead of MDX processing
     if (PROBLEMATIC_POSTS.includes(params.slug)) {
-      const { rawContent, frontMatter } = await getPostBySlug(
-        params.year,
-        params.slug,
-        true
-      );
-
+      const result = await getPostBySlug(params.year, params.slug, true);
+      if (!result) {
+        return { notFound: true };
+      }
+      // Ensure rawContent and frontMatter are never undefined (use null if missing)
+      const rawContent =
+        result.rawContent !== undefined ? result.rawContent : null;
+      const frontMatter =
+        result.frontMatter !== undefined ? result.frontMatter : null;
       return {
         props: {
           post: null,
