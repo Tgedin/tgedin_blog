@@ -6,6 +6,7 @@ export default function Header() {
   const router = useRouter();
   const [theme, setTheme] = useState("dark");
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Helper function to check if a link is active
   const isActive = (path) => {
@@ -112,7 +113,14 @@ export default function Header() {
         >
           From Bricks to Bytes
         </Link>
-        <div className="nav-links">
+        <button
+          className="mobile-menu-toggle"
+          aria-label="Open navigation menu"
+          onClick={() => setMobileMenuOpen((open) => !open)}
+        >
+          <span className="hamburger-icon">☰</span>
+        </button>
+        <div className={`nav-links${mobileMenuOpen ? " open" : ""}`}>
           <Link href="/blog" className={isActive("/blog") ? "active" : ""}>
             Blog
           </Link>
@@ -124,6 +132,18 @@ export default function Header() {
           </Link>
           <Link href="/about" className={isActive("/about") ? "active" : ""}>
             About
+          </Link>
+          <Link
+            href="/newsletter"
+            className={isActive("/newsletter") ? "active" : ""}
+          >
+            Newsletter Substack
+          </Link>
+          <Link
+            href="/contact"
+            className={`cta-contact ${isActive("/contact") ? "active" : ""}`}
+          >
+            Contact
           </Link>
           <button
             className="theme-toggle"
@@ -150,7 +170,6 @@ export default function Header() {
           background-color: rgba(var(--color-bg-rgb), 0.95);
         }
 
-        /* Ensure the blur effect works correctly with the new color scheme */
         [data-theme="dark"] header {
           background-color: rgba(
             30,
@@ -163,6 +182,64 @@ export default function Header() {
         [data-theme="dark"] header.scrolled {
           background-color: rgba(30, 32, 48, 0.98);
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0.5rem 1.5rem;
+        }
+
+        .site-title {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--color-primary);
+          text-decoration: none;
+        }
+
+        .nav-links {
+          display: flex;
+          align-items: center;
+          gap: 1.2rem;
+        }
+
+        .mobile-menu-toggle {
+          display: none;
+          background: none;
+          border: none;
+          font-size: 2rem;
+          margin-left: 1rem;
+          cursor: pointer;
+        }
+
+        .hamburger-icon {
+          display: block;
+        }
+
+        @media (max-width: 800px) {
+          .nav-links {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: var(--color-bg);
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 1.5rem;
+            padding: 1.5rem 2rem;
+            border-radius: 0 0 0 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            z-index: 100;
+            display: none;
+          }
+
+          .nav-links.open {
+            display: flex;
+          }
+
+          .mobile-menu-toggle {
+            display: block;
+          }
         }
 
         .theme-toggle {
@@ -208,6 +285,22 @@ export default function Header() {
         /* Hide the tooltip text for cleaner look */
         .theme-toggle::after {
           display: none;
+        }
+
+        .cta-contact {
+          background: var(--color-primary);
+          color: #fff;
+          padding: 0.5rem 1.2rem;
+          border-radius: 6px;
+          font-weight: 600;
+          margin-left: 1rem;
+          text-decoration: none;
+          transition: background 0.2s, color 0.2s;
+        }
+        .cta-contact:hover,
+        .cta-contact.active {
+          background: var(--color-primary-dark);
+          color: #fff;
         }
       `}</style>
     </header>

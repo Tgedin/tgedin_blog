@@ -204,57 +204,7 @@ export default function About() {
           </div>
         </section>
 
-        {/* Substack Newsletter Section */}
-        <section className="about-section substack-section">
-          <h2>Newsletter</h2>
-          <div className="substack-container">
-            <div className="substack-content">
-              <p className="substack-description">
-                What if our housing crisis isn&apos;t a resource problem, but an
-                information one? Weekly explorations from an engineer with a
-                poet&apos;s heart - mixing technical deep dives with
-                philosophical musings on how we build our world.
-              </p>
-              <a
-                href="https://theogedin.substack.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="substack-button"
-              >
-                Read Crossroads of Curiosity
-              </a>
-            </div>
-            <div className="substack-image-container">
-              <a
-                href="https://theogedin.substack.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="substack-logo-link"
-              >
-                <div className="substack-logo-wrapper">
-                  <img
-                    src="/Logo.png" // Updated image source
-                    alt="Crossroads of Curiosity Substack"
-                    className="substack-logo"
-                  />
-                </div>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <section className="about-section contact-section">
-          <h2>Get in Touch</h2>
-          <p>
-            Have an idea, opportunity, or just want to connect? I{"'"}m always
-            open to interesting conversations and potential collaborations.
-          </p>
-          <p>
-            Thank you for reaching out. I{"'"}ll get back to you as soon as
-            possible.
-          </p>
-          <ContactForm apiKey={web3FormsApiKey} />
-        </section>
+        {/* Newsletter section moved to /newsletter page */}
 
         <div className="profile-image-wrapper">
           <div className="profile-image-container">

@@ -171,11 +171,43 @@ export default function BricksToBytes({ className }) {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className={`w-full rounded-lg ${className || ""}`}
-      style={{ height: "16rem" }}
-      aria-label="Visual representation of transition from civil engineering to data science"
-    />
+    <div className="bricks-canvas-wrapper">
+      <canvas
+        ref={canvasRef}
+        className={`w-full rounded-lg shadow-md ${className || ""}`}
+        style={{
+          width: "100%",
+          height: "auto",
+          aspectRatio: "2 / 1",
+          maxWidth: 600,
+        }}
+        aria-label="Visual representation of transition from civil engineering to data science"
+      />
+      <style jsx>{`
+        .bricks-canvas-wrapper {
+          width: 100%;
+          max-width: 600px;
+          margin: 0 auto 2rem auto;
+        }
+        canvas {
+          width: 100% !important;
+          height: auto !important;
+          max-width: 600px;
+          border-radius: 1rem;
+          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+          display: block;
+        }
+        @media (max-width: 700px) {
+          .bricks-canvas-wrapper {
+            max-width: 98vw;
+          }
+          canvas {
+            max-width: 98vw;
+            aspect-ratio: 1.5 / 1;
+            min-height: 140px;
+          }
+        }
+      `}</style>
+    </div>
   );
 }
