@@ -165,25 +165,29 @@ export default function PostCard({ post, featured = false }) {
           /* Use aspect-ratio for consistent proportions */
           aspect-ratio: 16 / 9;
           width: 100%;
-          /* Remove absolute positioning, let it flow naturally */
           overflow: hidden;
-          position: relative; /* Keep relative for potential overlays */
+          display: flex; /* Use flexbox instead of positioning */
+          align-items: center;
+          justify-content: center;
         }
 
         .post-card-image {
-          /* Ensure image covers the wrapper */
-          position: absolute;
-          top: 0;
-          left: 0;
+          /* Make image fill exactly the wrapper dimensions */
           width: 100%;
           height: 100%;
           object-fit: cover;
           object-position: center;
           transition: transform 0.5s ease;
+          display: block; /* Ensure no extra space */
         }
 
         .post-card:hover .post-card-image {
           transform: scale(1.05);
+        }
+
+        /* Position meritocracy image higher */
+        .post-card-image[src="/meritocracy-banner.webp"] {
+          object-position: center top; /* Align precisely to the top edge */
         }
 
         @media (max-width: 768px) {
