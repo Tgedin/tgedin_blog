@@ -114,47 +114,86 @@ export default function Header() {
           From Bricks to Bytes
         </Link>
         <button
-          className="mobile-menu-toggle"
-          aria-label="Open navigation menu"
-          onClick={() => setMobileMenuOpen((open) => !open)}
+          className="theme-toggle always-visible"
+          onClick={toggleTheme}
+          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+          title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
         >
-          <span className="hamburger-icon">☰</span>
+          <span className="theme-icon">{getThemeIcon()}</span>
         </button>
-        <div className={`nav-links${mobileMenuOpen ? " open" : ""}`}>
-          <Link href="/blog" className={isActive("/blog") ? "active" : ""}>
-            Blog
-          </Link>
-          <Link
-            href="/projects"
-            className={isActive("/projects") ? "active" : ""}
-          >
-            Projects
-          </Link>
-          <Link href="/about" className={isActive("/about") ? "active" : ""}>
-            About
-          </Link>
-          <Link
-            href="/newsletter"
-            className={isActive("/newsletter") ? "active" : ""}
-          >
-            Newsletter Substack
-          </Link>
-          <Link
-            href="/contact"
-            className={`cta-contact ${isActive("/contact") ? "active" : ""}`}
-          >
-            Contact
-          </Link>
+        <div className="menu-container">
           <button
-            className="theme-toggle"
-            onClick={toggleTheme}
-            aria-label={`Switch to ${
-              theme === "light" ? "dark" : "light"
-            } mode`}
-            title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            className={`mobile-menu-toggle${
+              mobileMenuOpen ? " open" : ""
+            } ${theme}`}
+            aria-label={
+              mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+            onClick={() => setMobileMenuOpen((open) => !open)}
           >
-            <span className="theme-icon">{getThemeIcon()}</span>
+            <span className="hamburger-icon" aria-hidden="true">
+              {/* SVG Hamburger Icon */}
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="hamburger-svg"
+              >
+                <rect
+                  y="7"
+                  width="32"
+                  height="3"
+                  rx="1.5"
+                  fill="currentColor"
+                  className="bar top"
+                />
+                <rect
+                  y="14.5"
+                  width="32"
+                  height="3"
+                  rx="1.5"
+                  fill="currentColor"
+                  className="bar middle"
+                />
+                <rect
+                  y="22"
+                  width="32"
+                  height="3"
+                  rx="1.5"
+                  fill="currentColor"
+                  className="bar bottom"
+                />
+              </svg>
+            </span>
           </button>
+          <div className={`nav-links${mobileMenuOpen ? " open" : ""}`}>
+            <Link href="/blog" className={isActive("/blog") ? "active" : ""}>
+              Blog
+            </Link>
+            <Link
+              href="/projects"
+              className={isActive("/projects") ? "active" : ""}
+            >
+              Projects
+            </Link>
+            <Link href="/about" className={isActive("/about") ? "active" : ""}>
+              About
+            </Link>
+            <Link
+              href="/newsletter"
+              className={isActive("/newsletter") ? "active" : ""}
+            >
+              Newsletter Substack
+            </Link>
+            <Link
+              href="/contact"
+              className={`cta-contact ${isActive("/contact") ? "active" : ""}`}
+            >
+              Contact
+            </Link>
+          </div>
         </div>
       </nav>
 
@@ -198,47 +237,68 @@ export default function Header() {
           text-decoration: none;
         }
 
-        .nav-links {
+        .menu-container {
+          position: relative;
           display: flex;
           align-items: center;
-          gap: 1.2rem;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .nav-links.open {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 100%;
+          right: 0;
+          background: var(--color-bg);
+          align-items: flex-end;
+          gap: 1.5rem;
+          padding: 1.5rem 2rem;
+          border-radius: 0 0 0 16px;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+          z-index: 100;
         }
 
         .mobile-menu-toggle {
-          display: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           background: none;
           border: none;
           font-size: 2rem;
           margin-left: 1rem;
           cursor: pointer;
+          z-index: 200;
         }
 
         .hamburger-icon {
-          display: block;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .mobile-menu-toggle .bar {
+          transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .mobile-menu-toggle.open .bar.top {
+          transform: translateY(7.5px) rotate(45deg);
+        }
+
+        .mobile-menu-toggle.open .bar.middle {
+          opacity: 0;
+        }
+
+        .mobile-menu-toggle.open .bar.bottom {
+          transform: translateY(-7.5px) rotate(-45deg);
         }
 
         @media (max-width: 800px) {
-          .nav-links {
-            position: absolute;
-            top: 60px;
-            right: 0;
-            background: var(--color-bg);
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 1.5rem;
-            padding: 1.5rem 2rem;
-            border-radius: 0 0 0 16px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-            z-index: 100;
-            display: none;
-          }
-
           .nav-links.open {
-            display: flex;
-          }
-
-          .mobile-menu-toggle {
-            display: block;
+            /* Already handled above, keep for mobile */
           }
         }
 
@@ -287,6 +347,10 @@ export default function Header() {
           display: none;
         }
 
+        .theme-toggle.always-visible {
+          margin-left: 1.5rem;
+        }
+
         .cta-contact {
           background: var(--color-primary);
           color: #fff;
@@ -300,6 +364,13 @@ export default function Header() {
         .cta-contact:hover,
         .cta-contact.active {
           background: var(--color-primary-dark);
+          color: #fff;
+        }
+
+        .mobile-menu-toggle.light .hamburger-svg {
+          color: #111;
+        }
+        .mobile-menu-toggle.dark .hamburger-svg {
           color: #fff;
         }
       `}</style>
