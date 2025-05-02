@@ -8,15 +8,5 @@
     "tags": ["data science", "machine learning", "education", "python"],
     "completed": false,
     "featured": true
-  },
-  {
-    "id": "urban-infrastructure-dashboard",
-    "title": "Urban Infrastructure Analysis Dashboard",
-    "date": "2025-03-30",
-    "lastUpdated": "2025-04-01",
-    "description": "A geospatial analytics dashboard to help city planners make data-driven decisions about infrastructure maintenance and development",
-    "tags": ["data science", "civil engineering", "GIS", "python", "visualization"],
-    "completed": false,
-    "featured": true
   }
 ]
