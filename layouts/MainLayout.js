@@ -17,7 +17,14 @@ export default function MainLayout({ children, title, description, image }) {
       <Head>
         <title>{siteTitle}</title>
         <meta name="description" content={metaDescription} />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/banner.png" type="image/png" />
+        <style>{`
+          /* Make favicon appear circular in supported browsers */
+          link[rel="icon"] {
+            border-radius: 50%;
+            overflow: hidden;
+          }
+        `}</style>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="light dark" />
 
