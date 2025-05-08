@@ -26,10 +26,10 @@ export default function Newsletter() {
         </div>
         <div className="newsletter-content">
           <p className="newsletter-description">
-            What if our housing crisis isn{"'"}t a resource problem, but an
-            information one? Weekly explorations from an engineer with a poet
-            {"'"}s heart – mixing technical deep dives with philosophical
-            musings on how we build our world.
+            Exploring how emerging technologies can transform rigid systems into
+            human-centered solutions. Join my journey from France to Spain, from
+            civil engineering to data science, as I document the intersection
+            where traditional expertise meets new possibilities
           </p>
           <a
             href="https://theogedin.substack.com/"
