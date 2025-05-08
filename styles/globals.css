@@ -17,36 +17,38 @@
   --letter-spacing-headings: -0.01em;
   
   /* Light mode colors - beige/brown palette */
-  --color-bg: #F5F1E9;            /* Soft beige background */
-  --color-text: #433422;          /* Dark brown text */
+  --color-bg: #F7F5F1;            /* Soft beige background */
+  --color-text: #3B2F1C;          /* Dark brown text */
   --color-headings: #2D2315;      /* Darker brown headings */
-  --color-primary: #8B5A2B;       /* Warm brown primary */
-  --color-secondary: #7D6E5D;     /* Muted brown secondary */
-  --color-muted: #7D6E5D;         /* Same as secondary */
-  --color-border: #E6DED1;        /* Light tan border */
-  --color-card-bg: #FAF7F0;       /* Lighter beige card background */
+  --color-primary: #A67C52;       /* Warm brown primary */
+  --color-secondary: #A89B8C;     /* Muted brown secondary */
+  --color-muted: #B6AFA3;         /* Same as secondary */
+  --color-border: #E8E2D6;        /* Light tan border */
+  --color-card-bg: #FCFAF7;       /* Lighter beige card background */
   --color-code-bg: #EFEAE0;       /* Slightly darker beige for code */
   --color-blockquote-border: #D9CCBA; /* Medium tan for blockquotes */
+  --color-tag-bg: #F0E6D6;        /* Tag background */
   
   /* RGB versions for rgba use */
-  --color-primary-rgb: 139, 90, 43; /* RGB equivalent of #8B5A2B */
-  --color-bg-rgb: 245, 241, 233; /* RGB equivalent of #F5F1E9 */
+  --color-primary-rgb: 166, 124, 82; /* RGB equivalent of #A67C52 */
+  --color-bg-rgb: 247, 245, 241; /* RGB equivalent of #F7F5F1 */
 }
 
 /* Dark mode colors - updated with softer, warmer tones */
 [data-theme="dark"] {
-  --color-bg: #181a23; /* Slightly deeper background for more contrast */
-  --color-card-bg: #23263a; /* More contrast for cards */
-  --color-text: #f0f0fa; /* Brighter text */
-  --color-headings: #ffffff;
-  --color-primary: #7ab6ff;
-  --color-secondary: #bfc2d6; /* Lighter secondary for better contrast */
-  --color-muted: #a6aac7; /* Lighter muted for better contrast */
-  --color-border: #44476a; /* Slightly lighter border for separation */
-  --color-code-bg: #23263a;
-  --color-blockquote-border: #4e5377;
+  --color-bg: #191A23; /* Slightly deeper background for more contrast */
+  --color-card-bg: #23263A; /* More contrast for cards */
+  --color-text: #E0E0E0; /* Brighter text */
+  --color-headings: #FFFFFF;
+  --color-primary: #7AB6FF;
+  --color-secondary: #BFC2D6; /* Lighter secondary for better contrast */
+  --color-muted: #A6AAC7; /* Lighter muted for better contrast */
+  --color-border: #44476A; /* Slightly lighter border for separation */
+  --color-code-bg: #23263A;
+  --color-blockquote-border: #4E5377;
+  --color-tag-bg: #23263A; /* Tag background */
   --color-primary-rgb: 122, 182, 255;
-  --color-bg-rgb: 24, 26, 35;
+  --color-bg-rgb: 25, 26, 35;
 }
 
 [data-theme="dark"] .post-card,
