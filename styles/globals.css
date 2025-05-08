@@ -35,20 +35,48 @@
 
 /* Dark mode colors - updated with softer, warmer tones */
 [data-theme="dark"] {
-  --color-bg: #1e2030;             /* Softer blue-gray instead of near-black */
-  --color-text: rgba(235, 235, 245, 0.85); /* Softer white text */
-  --color-headings: #e4e4ef;       /* Slightly bluish white for headings */
-  --color-primary: #7ab6ff;        /* Lighter, softer blue */
-  --color-secondary: #b4b4c4;      /* Softer gray with hint of purple */
-  --color-muted: #9494a6;          /* Warmer muted text */
-  --color-border: #3d405b;         /* Dark blue-purple border */
-  --color-card-bg: #252942;        /* Slightly lighter than background */
-  --color-code-bg: #2d314f;        /* Code background with hint of blue */
-  --color-blockquote-border: #4e5377; /* Softer border color */
-  
-  /* RGB versions for rgba use */
-  --color-primary-rgb: 122, 182, 255; /* RGB equivalent of #7ab6ff */
-  --color-bg-rgb: 30, 32, 48;       /* RGB equivalent of #1e2030 */
+  --color-bg: #181a23; /* Slightly deeper background for more contrast */
+  --color-card-bg: #23263a; /* More contrast for cards */
+  --color-text: #f0f0fa; /* Brighter text */
+  --color-headings: #ffffff;
+  --color-primary: #7ab6ff;
+  --color-secondary: #bfc2d6; /* Lighter secondary for better contrast */
+  --color-muted: #a6aac7; /* Lighter muted for better contrast */
+  --color-border: #44476a; /* Slightly lighter border for separation */
+  --color-code-bg: #23263a;
+  --color-blockquote-border: #4e5377;
+  --color-primary-rgb: 122, 182, 255;
+  --color-bg-rgb: 24, 26, 35;
+}
+
+[data-theme="dark"] .post-card,
+[data-theme="dark"] .project-card,
+[data-theme="dark"] .skill-card,
+[data-theme="dark"] .module-item {
+  background-color: var(--color-card-bg);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .post-card-description,
+[data-theme="dark"] .project-card p,
+[data-theme="dark"] .project-meta-info,
+[data-theme="dark"] .skill-description,
+[data-theme="dark"] .module-column ul,
+[data-theme="dark"] .module-column li {
+  color: var(--color-secondary);
+}
+
+[data-theme="dark"] .post-card-tag,
+[data-theme="dark"] .project-tag {
+  background: rgba(122,182,255,0.08);
+  color: var(--color-primary);
+}
+
+[data-theme="dark"] .post-card:hover,
+[data-theme="dark"] .project-card:hover {
+  box-shadow: 0 8px 32px rgba(122,182,255,0.10);
+  border-color: var(--color-primary);
 }
 
 /* Base styles */

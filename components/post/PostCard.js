@@ -58,8 +58,9 @@ export default function PostCard({ post, featured = false }) {
             </div>
 
             <h2 className="post-card-title">{post.title}</h2>
-
-            {/* Removed description paragraph */}
+            {post.description && (
+              <p className="post-card-description">{post.description}</p>
+            )}
 
             <span className="post-card-read-more">Read article →</span>
           </div>
@@ -85,13 +86,16 @@ export default function PostCard({ post, featured = false }) {
           overflow: hidden;
           background-color: var(--color-card-bg);
           border: 1px solid var(--color-border);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          transition: transform 0.3s ease, box-shadow 0.3s ease,
+            border-color 0.2s;
           margin-bottom: 2rem;
+          cursor: pointer;
         }
 
         .post-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+          transform: translateY(-4px) scale(1.015);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+          border-color: var(--color-primary);
         }
 
         [data-theme="dark"] .post-card:hover {
@@ -144,7 +148,12 @@ export default function PostCard({ post, featured = false }) {
           flex-grow: 1; /* Allow title to grow */
         }
 
-        /* Removed description styles */
+        .post-card-description {
+          color: var(--color-text-secondary);
+          font-size: 1.02rem;
+          margin-bottom: 0.75rem;
+          line-height: 1.6;
+        }
 
         .post-card-read-more {
           color: var(--color-primary);

@@ -105,7 +105,7 @@ export default function Header() {
   };
 
   return (
-    <header className={scrolled ? "scrolled" : ""}>
+    <header className={`header sticky-header ${scrolled ? "scrolled" : ""}`}>
       <nav>
         <Link
           href="/"
@@ -223,6 +223,16 @@ export default function Header() {
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
+        .sticky-header {
+          position: sticky;
+          top: 0;
+          z-index: 100;
+          background: var(--color-card-bg);
+          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+          border-bottom: 1px solid var(--color-border);
+          transition: background 0.2s, box-shadow 0.2s;
+        }
+
         nav {
           display: flex;
           align-items: center;
@@ -304,7 +314,7 @@ export default function Header() {
 
         .theme-toggle {
           background: none;
-          border: none;
+          border: 1.5px solid transparent;
           cursor: pointer;
           display: flex;
           align-items: center;
@@ -313,10 +323,16 @@ export default function Header() {
           padding: 0.4rem;
           position: relative;
           border-radius: 50%;
-          transition: background-color 0.2s ease;
+          transition: background-color 0.2s ease, border 0.2s;
           width: 32px;
           height: 32px;
           opacity: 0.7;
+        }
+
+        .theme-toggle:hover,
+        .theme-toggle:focus {
+          border: 1.5px solid var(--color-primary);
+          background: rgba(var(--color-primary-rgb), 0.08);
         }
 
         .theme-toggle:hover {
