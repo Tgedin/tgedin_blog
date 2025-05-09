@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "manage-cache": "node scripts/manage-cache.js",
-    "prepare": "chmod +x scripts/pre-commit.js && npm link ./scripts/pre-commit.js"
+    "prepare": "chmod +x scripts/pre-commit.js"
   },
   "dependencies": {
     "@mdx-js/react": "^2.3.0",
