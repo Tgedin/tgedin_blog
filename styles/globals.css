@@ -17,14 +17,14 @@
   --letter-spacing-headings: -0.01em;
   
   /* Light mode colors - beige/brown palette */
-  --color-bg: #F7F5F1;            /* Soft beige background */
+  --color-bg: #ECE6DA;            /* Softer beige background */
   --color-text: #3B2F1C;          /* Dark brown text */
   --color-headings: #2D2315;      /* Darker brown headings */
   --color-primary: #A67C52;       /* Warm brown primary */
   --color-secondary: #A89B8C;     /* Muted brown secondary */
   --color-muted: #B6AFA3;         /* Same as secondary */
   --color-border: #E8E2D6;        /* Light tan border */
-  --color-card-bg: #FCFAF7;       /* Lighter beige card background */
+  --color-card-bg: #EDE7DE;       /* Slightly darker card background */
   --color-code-bg: #EFEAE0;       /* Slightly darker beige for code */
   --color-blockquote-border: #D9CCBA; /* Medium tan for blockquotes */
   --color-tag-bg: #F0E6D6;        /* Tag background */
