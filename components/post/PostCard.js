@@ -141,8 +141,9 @@ export default function PostCard({ post, featured = false }) {
           display: flex;
           align-items: center;
           justify-content: center;
+          position: relative;
         }
-        .post-card-image {
+        :global(.post-card-image) {
           width: 100%;
           height: 100%;
           object-fit: cover;
@@ -150,7 +151,7 @@ export default function PostCard({ post, featured = false }) {
           transition: transform 0.5s ease;
           display: block;
         }
-        .post-card:hover .post-card-image {
+        .post-card:hover :global(.post-card-image) {
           transform: scale(1.05);
         }
         @media (max-width: 768px) {
