@@ -1,88 +1,78 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
+import Link from "next/link";
 import MainLayout from "./MainLayout";
 import PostHeader from "../components/post/Header";
 import PostBody from "../components/post/Body";
-import PostContainer from "../components/post/Container";
 import ReadingProgress from "../components/ReadingProgress";
-import { marked } from "marked";
-import ArticleStyles from "../components/post/ArticleStyles";
+import ArticleStyles from "../components/ArticleStyles";
+import MDXHydrationFix from "../components/MDXHydrationFix";
 
-export default function BlogPostLayout({ post, components }) {
+export default function BlogPostLayout({
+  title,
+  description,
+  date,
+  tags,
+  image,
+  children,
+}) {
   const contentRef = useRef(null);
-
-  // Simple fallback for missing data
-  const title = post?.frontMatter?.title || "Blog Post";
-  const description = post?.frontMatter?.description || "";
-  const date = post?.frontMatter?.date || null;
-  const tags = post?.frontMatter?.tags || [];
-  const readingTime = post?.frontMatter?.readingTime || null;
 
   return (
     <MainLayout title={title} description={description}>
       <ReadingProgress target={contentRef} />
-      <PostContainer>
+      <div className="blog-post-container">
         <div ref={contentRef} className="blog-post">
-          <PostHeader
-            title={title}
-            date={date}
-            tags={tags}
-            readingTime={readingTime}
-          />
-          {post?.mdxSource ? (
-            <PostBody content={post.mdxSource} components={components} />
-          ) : post?.rawContent ? (
-            <ArticleStyles slug={post.slug}>
-              <div className="markdown-fallback">
-                <div
-                  className="markdown-content"
-                  dangerouslySetInnerHTML={{
-                    __html: marked.parse(post.rawContent),
-                  }}
-                />
-              </div>
+          <PostHeader title={title} date={date || null} tags={tags || []} />
+          <MDXHydrationFix>
+            <ArticleStyles>
+              <div className="mdx-content">{children}</div>
             </ArticleStyles>
-          ) : (
-            <div className="error-message">Content unavailable</div>
-          )}
-          <div className="browse-all-link">
-            <a href="/blog" className="view-all-link">
-              Browse all articles &rarr;
-            </a>
+          </MDXHydrationFix>
+
+          {/* Add blog navigation section */}
+          <div className="blog-navigation">
+            <Link href="/blog" className="browse-all-link">
+              ← Browse all articles
+            </Link>
           </div>
         </div>
-      </PostContainer>
+      </div>
       <style jsx>{`
-        .error-message {
-          padding: 1rem;
-          background-color: #fff5f5;
-          border-left: 4px solid #f56565;
-          margin: 1rem 0;
+        .blog-post-container {
+          max-width: var(--content-width);
+          margin: 0 auto;
+          padding: 2rem 1rem;
         }
-        .markdown-fallback {
-          margin-top: 1.5rem;
-        }
-        .fallback-warning {
-          color: #bfa700;
-          font-size: 0.95rem;
-          margin-bottom: 1rem;
-          text-align: center;
-          opacity: 0.7;
-        }
+
         .blog-post {
           width: 100%;
+          position: relative;
         }
+
+        .mdx-content {
+          font-size: 1.1rem;
+          line-height: 1.6;
+        }
+
+        .blog-navigation {
+          margin-top: 4rem;
+          padding-top: 2rem;
+          border-top: 1px solid var(--color-border);
+          display: flex;
+          justify-content: space-between;
+        }
+
         .browse-all-link {
-          margin-top: 2.5rem;
-          text-align: center;
-        }
-        .view-all-link {
           color: var(--color-primary);
           font-weight: 500;
           text-decoration: none;
-          font-size: 1.05rem;
+          display: inline-flex;
+          align-items: center;
+          transition: transform 0.2s ease;
         }
-        .view-all-link:hover {
-          text-decoration: underline;
+
+        .browse-all-link:hover {
+          transform: translateX(-4px);
         }
       `}</style>
     </MainLayout>

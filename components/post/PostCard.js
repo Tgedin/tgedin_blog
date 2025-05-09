@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { formatDate } from "../../lib/date";
+import Tag from "../Tag";
+import Image from "next/image";
 
 // Featured images mapping - correct images for specific articles
 const FEATURED_IMAGES = {
@@ -59,13 +61,13 @@ export default function PostCard({ post, featured = false }) {
         <div className="post-card-content">
           <div className="post-card-image-container">
             <div className="post-card-image-wrapper">
-              <img
+              <Image
                 src={imageUrl}
                 alt={`Cover image for ${post.title}`}
-                className="post-card-image"
-                loading="lazy"
                 width={featured ? 1280 : 640}
                 height={featured ? 720 : 360}
+                className="post-card-image"
+                priority={featured} // Load priority for featured posts
               />
             </div>
           </div>
@@ -73,9 +75,9 @@ export default function PostCard({ post, featured = false }) {
             <h2 className="post-card-title">{post.title}</h2>
             <div className="post-card-tags">
               {tags.map((tag) => (
-                <span key={tag} className="post-card-tag">
+                <Tag key={tag} size="small">
                   {tag}
-                </span>
+                </Tag>
               ))}
             </div>
           </div>

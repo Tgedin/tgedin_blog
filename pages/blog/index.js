@@ -16,8 +16,7 @@ export default function Blog({ posts }) {
           systems to artificial intelligence. These articles document my journey
           from civil engineering to data science, examining how we might build
           systems that better serve human needs while questioning the
-          philosophical implications of our technological choices. Less abstract
-          thinking, more grounded experiences.
+          philosophical implications of our technological choices.
         </p>
 
         {posts.length > 0 ? (

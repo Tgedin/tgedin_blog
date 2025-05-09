@@ -104,6 +104,24 @@ export default function Header() {
     }
   };
 
+  // Add body class when mobile menu is open
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      if (mobileMenuOpen) {
+        document.body.classList.add("menu-open");
+      } else {
+        document.body.classList.remove("menu-open");
+      }
+    }
+
+    // Cleanup function
+    return () => {
+      if (typeof document !== "undefined") {
+        document.body.classList.remove("menu-open");
+      }
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <header className={`header sticky-header ${scrolled ? "scrolled" : ""}`}>
       <nav>
@@ -269,7 +287,25 @@ export default function Header() {
           padding: 1.5rem 2rem;
           border-radius: 0 0 0 16px;
           box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-          z-index: 100;
+          z-index: 1000; /* Increased z-index to ensure it appears above other content */
+          max-height: calc(100vh - 70px); /* Allow scrolling if menu is tall */
+          overflow-y: auto;
+        }
+
+        @media (max-width: 768px) {
+          .nav-links.open {
+            position: fixed; /* Changed to fixed positioning */
+            top: 70px; /* Positioned below header height */
+            right: 0;
+            width: 80%; /* Limit width on mobile */
+            max-width: 300px;
+            height: auto;
+            bottom: 0; /* Extend to bottom of screen */
+            border-radius: 0;
+            overflow-y: auto; /* Allow scrolling */
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.15);
+            padding-bottom: 80px; /* Add padding at the bottom for better scrolling */
+          }
         }
 
         .mobile-menu-toggle {
@@ -377,6 +413,7 @@ export default function Header() {
           text-decoration: none;
           transition: background 0.2s, color 0.2s;
         }
+
         .cta-contact:hover,
         .cta-contact.active {
           background: var(--color-primary-dark);
@@ -386,6 +423,7 @@ export default function Header() {
         .mobile-menu-toggle.light .hamburger-svg {
           color: #111;
         }
+
         .mobile-menu-toggle.dark .hamburger-svg {
           color: #fff;
         }

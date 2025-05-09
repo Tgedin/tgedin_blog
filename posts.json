@@ -1,12 +1,19 @@
 [
   {
+    "id": "beyond-reality-ai-worlds-and-the-paradox-of-authentic-experience",
+    "title": "Beyond Reality: AI Worlds and the Paradox of Authentic Experience",
+    "date": "2025-03-29",
+    "description": "Exploring how AI-generated realities might paradoxically deepen our appreciation for authentic human experience",
+    "tags": ["AI", "Virtual Reality", "Philosophy", "Human Experience", "Technology"],
+    "year": "2025"
+  },
+  {
     "id": "ai-and-meritocracy",
     "title": "AI and the Promise of True Meritocracy",
     "date": "2025-03-27",
     "description": "Reflections on how AI might transform information sharing and create a more equitable future across industries",
-    "tags": ["Thoughts"],
-    "year": "2025",
-    "featured": true
+    "tags": ["AI", "Meritocracy", "Openness", "Civil Engineering", "Data Science", "Thoughts"],
+    "year": "2025"
   },
   {
     "id": "beyond-abstractions",
@@ -14,17 +21,6 @@
     "date": "2025-04-08",
     "description": "Reflections on how focusing on direct experience rather than mental frameworks leads to authentic living and innovation",
     "tags": ["Philosophy", "Personal Growth", "Technology"],
-    "year": "2025",
-    "featured": false
-  },
-  {
-    "id": "beyond-reality-ai-worlds-and-the-paradox-of-authentic-experience",
-    "title": "Beyond Reality: AI Worlds and the Paradox of Authentic Experience",
-    "date": "2025-03-29",
-    "lastUpdated": "2025-03-29",
-    "description": "Exploring how AI-generated realities might paradoxically deepen our appreciation for authentic human experience",
-    "tags": ["Thoughts"],
-    "year": "2025",
-    "featured": true
+    "year": "2025"
   }
 ]

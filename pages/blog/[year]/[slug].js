@@ -2,213 +2,175 @@ import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import BlogPostLayout from "../../../layouts/BlogPostLayout";
 import { getPostBySlug, getAllPosts } from "../../../lib/posts";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MainLayout from "../../../layouts/MainLayout";
+import { MDXRemote } from "next-mdx-remote";
 
-// Define problematic posts
-const PROBLEMATIC_POSTS = [
-  "beyond-abstractions",
-  "beyond-reality-ai-worlds-and-the-paradox-of-authentic-experience",
-  "ai-and-meritocracy",
-];
-
-// Simplify components to bare minimum
+// Custom components for MDX rendering
 const components = {};
 
 export default function BlogPost({ post, rawContent, frontMatter }) {
   const router = useRouter();
 
+  // Handle loading state during fallback
   if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
-
-  // If we have raw content but the post failed to process (problematic posts)
-  if (!post && (rawContent || frontMatter)) {
-    // Only show the image if it is NOT the same as the first image in the markdown content
-    let showFrontMatterImage = true;
-    let firstMarkdownImage = null;
-    if (rawContent) {
-      const match = rawContent.match(/!\[.*?\]\((.*?)\)/);
-      if (match && match[1] && frontMatter?.image) {
-        firstMarkdownImage = match[1];
-        if (firstMarkdownImage === frontMatter.image) {
-          showFrontMatterImage = false;
-        }
-      }
-    }
     return (
-      <MainLayout
-        title={frontMatter?.title || "Blog Post"}
-        description={frontMatter?.description || ""}
-      >
-        <div className="blog-container">
-          <article className="blog-post">
-            <header className="post-header">
-              {frontMatter?.tags && frontMatter.tags.length > 0 && (
-                <div className="post-tags">
-                  {frontMatter.tags.map((tag) => (
-                    <span key={tag} className="post-tag">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-              <h1>{frontMatter?.title}</h1>
-              <div className="post-meta">
-                {frontMatter?.date && (
-                  <time dateTime={frontMatter.date}>
-                    {new Date(frontMatter.date).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </time>
-                )}
-              </div>
-            </header>
-
-            {showFrontMatterImage && frontMatter?.image && (
-              <div className="featured-image-container">
-                <img
-                  src={frontMatter.image}
-                  alt={frontMatter.title || "Featured image"}
-                  className="featured-image"
-                />
-              </div>
-            )}
-
-            <div
-              className="post-content markdown-content"
-              dangerouslySetInnerHTML={{
-                __html: processRawContent(rawContent),
-              }}
-            />
-          </article>
+      <MainLayout>
+        <div className="loading">
+          <p>Loading post...</p>
         </div>
-
         <style jsx>{`
-          .blog-container {
-            max-width: var(--content-width);
-            margin: 0 auto;
-            padding: 1rem;
-          }
-
-          .featured-image-container {
-            margin: 2rem 0;
-          }
-
-          .featured-image {
-            width: 100%;
-            border-radius: 8px;
-            max-height: 500px;
-            object-fit: cover;
-          }
-
-          .markdown-content {
-            line-height: 1.8;
-            font-size: 1.1rem;
-          }
-
-          .markdown-content h2 {
-            margin-top: 2rem;
-          }
-
-          .markdown-content p {
-            margin: 1.5rem 0;
+          .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+            font-size: 1.2rem;
           }
         `}</style>
       </MainLayout>
     );
   }
 
-  // If no post data at all
-  if (!post) {
-    return <ErrorPage statusCode={404} />;
+  // If we have post data with serialized MDX source
+  if (post?.mdxSource) {
+    return (
+      <BlogPostLayout
+        title={post.frontMatter.title}
+        description={post.frontMatter.description}
+        date={post.frontMatter.date}
+        tags={post.frontMatter.tags}
+        image={post.frontMatter.image}
+      >
+        <MDXRemote {...post.mdxSource} components={components} />
+      </BlogPostLayout>
+    );
   }
 
-  // Regular rendering for non-problematic posts
-  return <BlogPostLayout post={post} components={components} />;
-}
+  // Fallback to raw content if MDX serialization failed
+  if (post?.rawContent || rawContent) {
+    const content = post?.rawContent || rawContent;
+    const meta = post?.frontMatter || frontMatter || {};
 
-// Simple function to process raw markdown content with basic formatting
-function processRawContent(content) {
-  if (!content) return "";
+    return (
+      <MainLayout
+        title={meta.title || "Blog Post"}
+        description={meta.description || ""}
+      >
+        <article className="blog-post">
+          <header>
+            <h1>{meta.title}</h1>
+            {meta.date && <div className="post-date">{meta.date}</div>}
+            {meta.tags && meta.tags.length > 0 && (
+              <div className="post-tags">
+                {meta.tags.map((tag) => (
+                  <span key={tag} className="tag">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </header>
 
-  // Remove frontmatter section (robust to all whitespace/newlines after ---)
-  let processedContent = content.replace(
-    /^---[\s\S]*?---[\r\n\u2028\u2029]*/u,
-    ""
-  );
+          {meta.image && (
+            <div className="featured-image">
+              <img src={meta.image} alt={meta.title || "Featured image"} />
+            </div>
+          )}
 
-  // Remove leading/trailing whitespace (including unicode)
-  processedContent = processedContent.replace(/^[\s\u00A0]+|[\s\u00A0]+$/g, "");
+          <div className="content markdown-content">
+            {content &&
+              content
+                .split("\n")
+                .map((paragraph, i) =>
+                  paragraph.trim() ? <p key={i}>{paragraph}</p> : null
+                )}
+          </div>
+        </article>
 
-  // Convert markdown headings
-  processedContent = processedContent.replace(/^## (.*$)/gim, "<h2>$1</h2>");
-  processedContent = processedContent.replace(/^# (.*$)/gim, "<h1>$1</h1>");
+        <style jsx>{`
+          .blog-post {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: 2rem 1rem;
+          }
 
-  // Convert markdown images
-  processedContent = processedContent.replace(
-    /!\[(.*?)\]\((.*?)\)/gim,
-    '<img src="$2" alt="$1" class="content-image" />'
-  );
+          header {
+            margin-bottom: 2rem;
+          }
 
-  // Convert markdown links
-  processedContent = processedContent.replace(
-    /\[(.*?)\]\((.*?)\)/gim,
-    '<a href="$2">$1</a>'
-  );
+          h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+          }
 
-  // Split into lines and wrap non-empty, non-HTML lines in <p>
-  processedContent = processedContent
-    .split(/\r?\n/)
-    .map((line) => {
-      const trimmed = line.trim();
-      if (!trimmed) return "";
-      if (/^<.*?>/.test(trimmed)) return trimmed;
-      return `<p>${trimmed}</p>`;
-    })
-    .join("\n");
+          .post-date {
+            color: var(--color-text-secondary);
+            margin-bottom: 1rem;
+          }
 
-  return processedContent;
+          .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+          }
+
+          .tag {
+            background: var(--color-bg-secondary);
+            color: var(--color-text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+          }
+
+          .featured-image {
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+          }
+
+          .featured-image img {
+            width: 100%;
+            height: auto;
+          }
+
+          .content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+          }
+        `}</style>
+      </MainLayout>
+    );
+  }
+
+  // No content available
+  return <ErrorPage statusCode={404} />;
 }
 
 export async function getStaticProps({ params }) {
   try {
-    // For problematic posts, get raw content instead of MDX processing
-    if (PROBLEMATIC_POSTS.includes(params.slug)) {
-      const result = await getPostBySlug(params.year, params.slug, true);
-      if (!result) {
-        return { notFound: true };
-      }
-      // Ensure rawContent and frontMatter are never undefined (use null if missing)
-      const rawContent =
-        result.rawContent !== undefined ? result.rawContent : null;
-      const frontMatter =
-        result.frontMatter !== undefined ? result.frontMatter : null;
-      return {
-        props: {
-          post: null,
-          rawContent,
-          frontMatter,
-        },
-        revalidate: 3600, // Revalidate every hour
-      };
-    }
+    console.log(`Getting post: year=${params.year}, slug=${params.slug}`);
 
     const post = await getPostBySlug(params.year, params.slug);
 
     if (!post) {
+      console.error(`Post not found: ${params.year}/${params.slug}`);
       return { notFound: true };
     }
 
+    // Make sure post data is fully serializable for Next.js
     return {
-      props: { post },
-      revalidate: 3600,
+      props: {
+        post: JSON.parse(JSON.stringify(post)),
+        rawContent: null,
+        frontMatter: null,
+      },
+      revalidate: 60, // Revalidate every minute during development
     };
   } catch (error) {
     console.error(
-      `Error generating page for ${params.year}/${params.slug}:`,
+      `Error in getStaticProps for ${params.year}/${params.slug}:`,
       error
     );
     return { notFound: true };
@@ -216,33 +178,19 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  try {
-    const posts = getAllPosts();
+  const posts = getAllPosts();
 
-    // Only include non-problematic posts for static generation
-    const paths = posts
-      .filter((post) => !PROBLEMATIC_POSTS.includes(post.id))
-      .map((post) => ({
-        params: {
-          year: post.year,
-          slug: post.id,
-        },
-      }));
+  const paths = posts.map((post) => ({
+    params: {
+      year: String(post.year),
+      slug: String(post.id),
+    },
+  }));
 
-    console.log(
-      `Generating static paths for ${paths.length} out of ${posts.length} posts`
-    );
+  console.log(`Generated ${paths.length} static paths for posts`);
 
-    return {
-      paths,
-      // Use true to completely skip SSR for paths not included above
-      fallback: true,
-    };
-  } catch (error) {
-    console.error("Error in getStaticPaths:", error);
-    return {
-      paths: [],
-      fallback: true,
-    };
-  }
+  return {
+    paths,
+    fallback: "blocking",
+  };
 }
