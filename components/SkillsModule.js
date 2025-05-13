@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
-export default function SkillsModule({ defaultCollapsed = true }) {
+export default function SkillsModule({ defaultCollapsed = false }) {
   const [activeTab, setActiveTab] = useState("phase1");
   const [animating, setAnimating] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
+  const [isCollapsed, setIsCollapsed] = useState(false); // Always expanded by default
 
   // Helper function to determine if a tab is active
   const isActive = (tabName) => activeTab === tabName;
@@ -19,27 +19,22 @@ export default function SkillsModule({ defaultCollapsed = true }) {
     }, 200);
   };
 
+  // Keep the toggleCollapse function but modify it to prevent collapsing
   const toggleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
+    // Optional: Can be removed if you want to completely disable collapsing
+    // This keeps the UI element but it won't collapse the content
+    console.log("Skills module is now always expanded");
   };
 
   return (
-    <div className={`skills-module ${isCollapsed ? "collapsed" : "expanded"}`}>
-      {/* Collapsible Toggle Header */}
-      <div className="skills-toggle" onClick={toggleCollapse}>
-        <h3>My Professional Skills</h3>
-        <button
-          className="collapse-toggle"
-          aria-label={
-            isCollapsed ? "Expand skills section" : "Collapse skills section"
-          }
-        >
-          <span>{isCollapsed ? "▼ Show Skills" : "▲ Hide Skills"}</span>
-        </button>
+    <div className={`skills-module expanded`}>
+      {/* Heading without collapse functionality */}
+      <div className="skills-header">
+        <h2 className="featured-heading">My Professional Skills</h2>
       </div>
 
-      {/* Content that shows/hides */}
-      <div className="collapsible-content">
+      {/* Content that is always visible */}
+      <div className="collapsible-content visible">
         {/* Skill Section Introduction */}
         <div className="skills-intro">
           <p>
@@ -508,6 +503,45 @@ export default function SkillsModule({ defaultCollapsed = true }) {
       </div>
 
       <style jsx>{`
+        .skills-module {
+          margin: 2rem 0 3rem;
+          border-radius: 12px;
+          overflow: hidden;
+          background-color: var(--color-card-bg);
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+          transition: box-shadow 0.3s ease;
+          border: 1px solid var(--color-border);
+        }
+
+        .skills-module:hover {
+          box-shadow: 0 6px 24px rgba(0, 0, 0, 0.16);
+        }
+
+        .skills-header {
+          padding: 1.5rem 2rem;
+          background-color: var(--color-card-bg);
+          border-bottom: 1px solid var(--color-border);
+        }
+
+        .skills-header h2 {
+          margin: 0;
+          color: var(--color-headings);
+          font-size: 1.75rem;
+          margin-bottom: 0;
+        }
+
+        .collapsible-content {
+          max-height: none;
+          overflow: visible;
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .collapsible-content.visible {
+          /* Ensure content is always visible */
+          display: block;
+        }
+
         .skills-intro {
           padding: 1.5rem 2rem 0;
           color: var(--color-secondary);

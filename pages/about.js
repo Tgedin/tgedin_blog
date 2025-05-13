@@ -341,6 +341,79 @@ export default function About() {
             margin-top: 1.5rem;
           }
         }
+
+        /* CV Button Styling Fixes */
+        .cv-section {
+          margin: 3rem 0;
+        }
+
+        .cv-buttons {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1.5rem;
+          margin: 1.5rem 0;
+        }
+
+        .cv-button {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 1.5rem;
+          background-color: var(--color-card-bg);
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-md);
+          color: var(--color-text);
+          text-decoration: none;
+          transition: all var(--transition-medium) ease;
+          width: 180px;
+          height: 120px;
+        }
+
+        .cv-button:hover {
+          transform: translateY(-5px);
+          border-color: var(--color-primary);
+          box-shadow: var(--shadow-md);
+          text-decoration: none;
+        }
+
+        .cv-lang {
+          font-size: 1.2rem;
+          font-weight: 600;
+          margin-bottom: 0.75rem;
+          color: var(--color-headings);
+        }
+
+        .cv-download {
+          font-size: 0.9rem;
+          color: var(--color-primary);
+        }
+
+        /* Responsive styling for CV buttons */
+        @media (max-width: 768px) {
+          .cv-buttons {
+            justify-content: center;
+            gap: 1rem;
+          }
+
+          .cv-button {
+            width: 160px;
+            height: 110px;
+            padding: 1.25rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .cv-buttons {
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .cv-button {
+            width: 100%;
+            max-width: 220px;
+          }
+        }
       `}</style>
     </MainLayout>
   );

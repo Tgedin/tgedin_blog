@@ -44,29 +44,22 @@ export default function Header() {
     }
   }, []);
 
-  // Toggle theme function with improved animation
+  // Toggle theme function
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
-
-    // Update state
     setTheme(newTheme);
-
-    // Update DOM
     document.documentElement.setAttribute("data-theme", newTheme);
-
-    // Save preference
     localStorage.setItem("theme", newTheme);
   };
 
-  // Function to get the proper theme icon with improved visuals
+  // Function to get the proper theme icon
   const getThemeIcon = () => {
-    // Replace emojis with minimalist SVG icons
     if (theme === "light") {
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -81,8 +74,8 @@ export default function Header() {
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -114,7 +107,6 @@ export default function Header() {
       }
     }
 
-    // Cleanup function
     return () => {
       if (typeof document !== "undefined") {
         document.body.classList.remove("menu-open");
@@ -124,69 +116,17 @@ export default function Header() {
 
   return (
     <header className={`header sticky-header ${scrolled ? "scrolled" : ""}`}>
-      <nav>
+      <div className="header-container">
         <Link
           href="/"
           className={`site-title ${isActive("/") ? "active" : ""}`}
         >
           From Bricks to Bytes
         </Link>
-        <button
-          className="theme-toggle always-visible"
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-          title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-        >
-          <span className="theme-icon">{getThemeIcon()}</span>
-        </button>
-        <div className="menu-container">
-          <button
-            className={`mobile-menu-toggle${
-              mobileMenuOpen ? " open" : ""
-            } ${theme}`}
-            aria-label={
-              mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
-            }
-            onClick={() => setMobileMenuOpen((open) => !open)}
-          >
-            <span className="hamburger-icon" aria-hidden="true">
-              {/* SVG Hamburger Icon */}
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="hamburger-svg"
-              >
-                <rect
-                  y="7"
-                  width="32"
-                  height="3"
-                  rx="1.5"
-                  fill="currentColor"
-                  className="bar top"
-                />
-                <rect
-                  y="14.5"
-                  width="32"
-                  height="3"
-                  rx="1.5"
-                  fill="currentColor"
-                  className="bar middle"
-                />
-                <rect
-                  y="22"
-                  width="32"
-                  height="3"
-                  rx="1.5"
-                  fill="currentColor"
-                  className="bar bottom"
-                />
-              </svg>
-            </span>
-          </button>
-          <div className={`nav-links${mobileMenuOpen ? " open" : ""}`}>
+
+        {/* Desktop Navigation */}
+        <nav className="desktop-nav">
+          <div className="nav-links">
             <Link href="/blog" className={isActive("/blog") ? "active" : ""}>
               Blog
             </Link>
@@ -199,63 +139,131 @@ export default function Header() {
             <Link href="/about" className={isActive("/about") ? "active" : ""}>
               About
             </Link>
-            <Link
-              href="/newsletter"
-              className={isActive("/newsletter") ? "active" : ""}
+            <a
+              href="https://theogedin.substack.com/"
+              className="nav-external-link"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Newsletter Substack
-            </Link>
+              Newsletter
+            </a>
             <Link
               href="/contact"
-              className={`cta-contact ${isActive("/contact") ? "active" : ""}`}
+              className={`contact-button ${
+                isActive("/contact") ? "active" : ""
+              }`}
             >
               Contact
             </Link>
           </div>
+
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${
+              theme === "light" ? "dark" : "light"
+            } mode`}
+            title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+          >
+            <span className="theme-icon">{getThemeIcon()}</span>
+          </button>
+        </nav>
+
+        {/* Mobile Navigation Controls */}
+        <div className="mobile-controls">
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${
+              theme === "light" ? "dark" : "light"
+            } mode`}
+            title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+          >
+            <span className="theme-icon">{getThemeIcon()}</span>
+          </button>
+
+          <button
+            className={`mobile-menu-toggle ${mobileMenuOpen ? "open" : ""}`}
+            aria-label={
+              mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <span className="bar"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
+          </button>
         </div>
-      </nav>
+      </div>
+
+      {/* Mobile Menu Drawer */}
+      <div className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
+        <nav>
+          <Link
+            href="/blog"
+            className={isActive("/blog") ? "active" : ""}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Blog
+          </Link>
+          <Link
+            href="/projects"
+            className={isActive("/projects") ? "active" : ""}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Projects
+          </Link>
+          <Link
+            href="/about"
+            className={isActive("/about") ? "active" : ""}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            About
+          </Link>
+          <a
+            href="https://theogedin.substack.com/"
+            className="nav-external-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Newsletter
+          </a>
+          <Link
+            href="/contact"
+            className={`contact-button ${isActive("/contact") ? "active" : ""}`}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Contact
+          </Link>
+        </nav>
+      </div>
 
       <style jsx>{`
-        header {
-          transition: box-shadow 0.3s ease, background-color 0.3s ease;
-          background-color: var(--color-bg);
-          backdrop-filter: blur(10px);
-        }
-
-        header.scrolled {
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-          background-color: rgba(var(--color-bg-rgb), 0.95);
-        }
-
-        [data-theme="dark"] header {
-          background-color: rgba(
-            30,
-            32,
-            48,
-            0.9
-          ); /* Match the new dark mode color */
-        }
-
-        [data-theme="dark"] header.scrolled {
-          background-color: rgba(30, 32, 48, 0.98);
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .sticky-header {
+        .header {
           position: sticky;
           top: 0;
+          width: 100%;
           z-index: 100;
-          background: var(--color-card-bg);
-          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+          background: rgba(var(--color-bg-rgb), 0.9);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
           border-bottom: 1px solid var(--color-border);
-          transition: background 0.2s, box-shadow 0.2s;
+          transition: all var(--transition-medium) ease;
         }
 
-        nav {
+        .header-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0.75rem 1.5rem;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0.5rem 1.5rem;
+        }
+
+        .header.scrolled {
+          box-shadow: var(--shadow-md);
+          background: rgba(var(--color-bg-rgb), 0.97);
         }
 
         .site-title {
@@ -263,169 +271,230 @@ export default function Header() {
           font-weight: 700;
           color: var(--color-primary);
           text-decoration: none;
+          transition: color var(--transition-fast) ease;
+          letter-spacing: -0.02em;
         }
 
-        .menu-container {
-          position: relative;
+        .site-title:hover {
+          color: var(--color-primary-dark);
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav {
           display: flex;
           align-items: center;
         }
 
         .nav-links {
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+        }
+
+        .nav-links a {
+          color: var(--color-text);
+          text-decoration: none;
+          font-weight: 500;
+          font-size: 0.95rem;
+          padding: 0.5rem 0;
+          position: relative;
+          transition: color var(--transition-medium) ease;
+        }
+
+        .nav-links a::after {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: 0;
+          left: 0;
+          background-color: var(--color-primary);
+          transition: width var(--transition-medium) ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+          color: var(--color-primary);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+          width: 100%;
+        }
+
+        /* External link styling */
+        .nav-external-link {
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+
+        .nav-external-link::after {
+          content: "↗";
+          font-size: 0.8rem;
+          transition: transform var(--transition-fast) ease;
+          display: inline-block;
+          opacity: 0.8;
+          margin-left: 2px;
+        }
+
+        .nav-external-link:hover::after {
+          transform: translate(2px, -2px);
+        }
+
+        /* Contact button styling */
+        .contact-button {
+          background-color: var(--color-primary);
+          color: white !important;
+          padding: 0.5rem 1rem;
+          border-radius: var(--radius-md);
+          font-weight: 500;
+          transition: all var(--transition-medium) ease;
+          text-align: center;
+        }
+
+        .contact-button:hover,
+        .contact-button.active {
+          background-color: var(--color-primary-dark);
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-sm);
+          text-decoration: none;
+        }
+
+        .contact-button::after {
           display: none;
         }
 
-        .nav-links.open {
-          display: flex;
-          flex-direction: column;
-          position: absolute;
-          top: 100%;
-          right: 0;
-          background: var(--color-bg);
-          align-items: flex-end;
-          gap: 1.5rem;
-          padding: 1.5rem 2rem;
-          border-radius: 0 0 0 16px;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-          z-index: 1000; /* Increased z-index to ensure it appears above other content */
-          max-height: calc(100vh - 70px); /* Allow scrolling if menu is tall */
-          overflow-y: auto;
-        }
-
-        @media (max-width: 768px) {
-          .nav-links.open {
-            position: fixed; /* Changed to fixed positioning */
-            top: 70px; /* Positioned below header height */
-            right: 0;
-            width: 80%; /* Limit width on mobile */
-            max-width: 300px;
-            height: auto;
-            bottom: 0; /* Extend to bottom of screen */
-            border-radius: 0;
-            overflow-y: auto; /* Allow scrolling */
-            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.15);
-            padding-bottom: 80px; /* Add padding at the bottom for better scrolling */
-          }
-        }
-
-        .mobile-menu-toggle {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: none;
-          border: none;
-          font-size: 2rem;
-          margin-left: 1rem;
-          cursor: pointer;
-          z-index: 200;
-        }
-
-        .hamburger-icon {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .mobile-menu-toggle .bar {
-          transition: transform 0.3s, opacity 0.3s;
-        }
-
-        .mobile-menu-toggle.open .bar.top {
-          transform: translateY(7.5px) rotate(45deg);
-        }
-
-        .mobile-menu-toggle.open .bar.middle {
-          opacity: 0;
-        }
-
-        .mobile-menu-toggle.open .bar.bottom {
-          transform: translateY(-7.5px) rotate(-45deg);
-        }
-
-        @media (max-width: 800px) {
-          .nav-links.open {
-            /* Already handled above, keep for mobile */
-          }
-        }
-
+        /* Theme Toggle */
         .theme-toggle {
           background: none;
-          border: 1.5px solid transparent;
+          border: none;
           cursor: pointer;
+          margin-left: 1.5rem;
+          padding: 0.5rem;
           display: flex;
           align-items: center;
           justify-content: center;
           color: var(--color-text);
-          padding: 0.4rem;
-          position: relative;
           border-radius: 50%;
-          transition: background-color 0.2s ease, border 0.2s;
-          width: 32px;
-          height: 32px;
-          opacity: 0.7;
-        }
-
-        .theme-toggle:hover,
-        .theme-toggle:focus {
-          border: 1.5px solid var(--color-primary);
-          background: rgba(var(--color-primary-rgb), 0.08);
+          transition: background-color var(--transition-fast) ease;
         }
 
         .theme-toggle:hover {
+          background-color: rgba(var(--color-primary-rgb), 0.1);
           color: var(--color-primary);
-          background-color: rgba(var(--color-primary-rgb), 0.05);
-          opacity: 1;
         }
 
-        .theme-toggle:focus-visible {
-          outline: 2px solid var(--color-primary);
-          outline-offset: 2px;
-        }
-
-        .theme-icon {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: transform 0.2s ease;
-        }
-
-        /* Remove rotation animation for more minimalist feel */
-        .theme-toggle:hover .theme-icon {
-          transform: none;
-        }
-
-        /* Hide the tooltip text for cleaner look */
-        .theme-toggle::after {
+        /* Mobile Elements */
+        .mobile-controls {
           display: none;
+          align-items: center;
+          gap: 0.75rem;
         }
 
-        .theme-toggle.always-visible {
-          margin-left: 1.5rem;
+        .mobile-menu-toggle {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          width: 24px;
+          height: 18px;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+          z-index: 10;
         }
 
-        .cta-contact {
-          background: var(--color-primary);
-          color: #fff;
-          padding: 0.5rem 1.2rem;
-          border-radius: 6px;
-          font-weight: 600;
-          margin-left: 1rem;
+        .mobile-menu-toggle .bar {
+          width: 100%;
+          height: 2px;
+          background-color: var(--color-text);
+          transition: all 0.3s ease;
+          border-radius: 1px;
+        }
+
+        .mobile-menu-toggle.open .bar:nth-child(1) {
+          transform: translateY(8px) rotate(45deg);
+        }
+
+        .mobile-menu-toggle.open .bar:nth-child(2) {
+          opacity: 0;
+        }
+
+        .mobile-menu-toggle.open .bar:nth-child(3) {
+          transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .mobile-menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background-color: var(--color-card-bg);
+          padding: 1rem 0;
+          box-shadow: var(--shadow-lg);
+          transform: translateY(-10px);
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          z-index: 99;
+          border-bottom: 1px solid var(--color-border);
+        }
+
+        .mobile-menu.open {
+          transform: translateY(0);
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .mobile-menu nav {
+          display: flex;
+          flex-direction: column;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 1.5rem;
+        }
+
+        .mobile-menu a {
           text-decoration: none;
-          transition: background 0.2s, color 0.2s;
+          color: var(--color-text);
+          font-weight: 500;
+          padding: 0.875rem 0;
+          border-bottom: 1px solid var(--color-border);
+          transition: color var(--transition-medium) ease;
         }
 
-        .cta-contact:hover,
-        .cta-contact.active {
-          background: var(--color-primary-dark);
-          color: #fff;
+        .mobile-menu a:last-child {
+          border-bottom: none;
         }
 
-        .mobile-menu-toggle.light .hamburger-svg {
-          color: #111;
+        .mobile-menu a:hover,
+        .mobile-menu a.active {
+          color: var(--color-primary);
         }
 
-        .mobile-menu-toggle.dark .hamburger-svg {
-          color: #fff;
+        .mobile-menu .contact-button {
+          margin-top: 0.5rem;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+          .desktop-nav {
+            display: none;
+          }
+
+          .mobile-controls {
+            display: flex;
+          }
+
+          .mobile-menu {
+            display: block;
+          }
+
+          .header-container {
+            padding: 0.625rem 1.25rem;
+          }
         }
       `}</style>
     </header>

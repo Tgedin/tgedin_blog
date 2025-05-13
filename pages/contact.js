@@ -31,6 +31,40 @@ export default function Contact() {
           </p>
           <ContactForm apiKey={web3FormsApiKey} />
         </section>
+
+        {/* New Social Links Section */}
+        <section className="social-links-section">
+          <h2>Find Me On</h2>
+          <div className="social-links">
+            <a
+              href="https://x.com/TheoGedin"
+              className="social-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="social-icon">𝕏</span>
+              <span>X</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/theo-gedin/"
+              className="social-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="social-icon">💼</span>
+              <span>LinkedIn</span>
+            </a>
+            <a
+              href="https://github.com/Tgedin"
+              className="social-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="social-icon">💻</span>
+              <span>GitHub</span>
+            </a>
+          </div>
+        </section>
       </div>
       <style jsx>{`
         .contact-container {
@@ -63,6 +97,57 @@ export default function Contact() {
         .contact-section p {
           font-size: 1.1rem;
           margin-bottom: 2rem;
+        }
+
+        .social-links-section {
+          margin-top: 3rem;
+          text-align: center;
+        }
+
+        .social-links {
+          display: flex;
+          justify-content: center;
+          gap: 1.5rem;
+          margin-top: 1.5rem;
+          flex-wrap: wrap;
+        }
+
+        .social-link {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 1.25rem;
+          background-color: var(--color-card-bg);
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-md);
+          min-width: 120px;
+          transition: all var(--transition-medium) ease;
+          text-decoration: none;
+          color: var(--color-text);
+        }
+
+        .social-link:hover {
+          transform: translateY(-5px);
+          border-color: var(--color-primary);
+          box-shadow: var(--shadow-md);
+          text-decoration: none;
+        }
+
+        .social-icon {
+          font-size: 2rem;
+          margin-bottom: 0.75rem;
+        }
+
+        @media (max-width: 640px) {
+          .social-links {
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .social-link {
+            width: 100%;
+            max-width: 200px;
+          }
         }
       `}</style>
     </MainLayout>

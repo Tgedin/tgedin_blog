@@ -5,6 +5,7 @@ import { getProjectBySlug, getAllProjects } from "../../lib/projects";
 import { formatDate } from "../../lib/date";
 import { MDXRemote } from "next-mdx-remote";
 import BootcampSyllabus from "../../components/BootcampSyllabus";
+import Image from "next/image";
 
 const components = {
   BootcampSyllabus,
@@ -41,6 +42,32 @@ export default function Project({ project }) {
   return (
     <MainLayout title={frontmatter.title} description={frontmatter.description}>
       <div className="project-container">
+        <div className="project-hero-image">
+          {project.slug === "data-science-bootcamp" ? (
+            <div className="logo-container">
+              <Image
+                src="/4geeksacademyes_logo.jpeg"
+                alt="4Geeks Academy"
+                width={600}
+                height={300}
+                className="bootcamp-logo"
+                priority
+              />
+            </div>
+          ) : (
+            frontmatter.image && (
+              <Image
+                src={frontmatter.image}
+                alt={frontmatter.title}
+                width={1200}
+                height={600}
+                className="project-banner-image"
+                priority
+              />
+            )
+          )}
+        </div>
+
         <header className="project-header">
           {frontmatter.tags && frontmatter.tags.length > 0 && (
             <div className="project-tags">
@@ -86,6 +113,39 @@ export default function Project({ project }) {
           max-width: var(--content-width);
           margin: 0 auto;
           padding: 3rem 1.5rem;
+        }
+
+        .project-hero-image {
+          margin: -3rem -1.5rem 2rem;
+          width: calc(100% + 3rem);
+          height: 300px;
+          position: relative;
+          overflow: hidden;
+          background-color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .logo-container {
+          padding: 2rem;
+          max-width: 90%;
+          max-height: 90%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        :global(.bootcamp-logo) {
+          object-fit: contain;
+          max-width: 100%;
+          max-height: 100%;
+        }
+
+        :global(.project-banner-image) {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
         }
 
         .project-header h1 {
@@ -199,6 +259,16 @@ export default function Project({ project }) {
 
           .project-content {
             font-size: 1rem;
+          }
+
+          .project-hero-image {
+            height: 200px;
+            margin: -2rem -1rem 1.5rem;
+            width: calc(100% + 2rem);
+          }
+
+          .logo-container {
+            padding: 1rem;
           }
         }
       `}</style>

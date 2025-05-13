@@ -17,6 +17,9 @@ function MyApp({ Component, pageProps }) {
       document.documentElement.setAttribute("data-theme", "dark");
       localStorage.setItem("theme", "dark");
     }
+
+    // Remove any js-loaded class that might have been added for cursor styling
+    document.documentElement.classList.remove("js-loaded");
   }, []);
 
   return <Component {...pageProps} />;
