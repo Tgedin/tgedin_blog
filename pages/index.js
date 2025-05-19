@@ -1,7 +1,7 @@
+import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import MainLayout from "../layouts/MainLayout";
-import { getAllPosts } from "../lib/posts";
 import { getAllProjects } from "../lib/projects";
 import { formatDate } from "../lib/date";
 import SkillsModule from "../components/SkillsModule";
@@ -14,14 +14,30 @@ export default function Home({ recentPosts = [], projects = [] }) {
   const featuredProjects =
     projects?.filter((project) => project.featured) || [];
 
-  // Get the most recent post - with null check
-  const latestPost = recentPosts?.length > 0 ? recentPosts[0] : null;
-
   return (
     <MainLayout>
+      <Head>
+        <meta
+          name="description"
+          content="Professional portfolio of Théo Gédin. Showcasing projects and sharing insights on software engineering, data science, machine learning, and urban planning."
+        />
+      </Head>
       <div className="home-container">
         {/* Hero Section with profile image and improved styling */}
         <section className="hero-section">
+          {/* Visually hidden H1 for SEO */}
+          <h1
+            style={{
+              position: "absolute",
+              left: "-9999px",
+              top: "auto",
+              width: "1px",
+              height: "1px",
+              overflow: "hidden",
+            }}
+          >
+            Théo Gédin
+          </h1>
           <div className="profile-image-container animate-float">
             <Image
               src="/profile_pic.webp"
@@ -32,13 +48,23 @@ export default function Home({ recentPosts = [], projects = [] }) {
               priority
             />
           </div>
-
-          <h1 className="site-title animate-fade-in">From Bricks to Bytes</h1>
+          {/* Change site-title to subtitle */}
+          <h2 className="site-title animate-fade-in">Bricks to Bytes</h2>
           <p className="intro animate-fade-in-delay">
-            Personal blog by{" "}
-            <span itemProp="name" className="highlight-text">
-              Théo Gédin
-            </span>
+            {(() => {
+              console.log("Rendering correct intro text on homepage");
+              return (
+                <>
+                  Professional portfolio of{" "}
+                  <span itemProp="name" className="highlight-text">
+                    Théo Gédin
+                  </span>
+                  . Showcasing projects and sharing insights on software
+                  engineering, data science, machine learning, and urban
+                  planning.
+                </>
+              );
+            })()}
           </p>
 
           {/* CTA buttons */}
@@ -140,27 +166,6 @@ export default function Home({ recentPosts = [], projects = [] }) {
         <div className="section-separator">
           <span className="separator-icon">📝</span>
         </div>
-
-        {/* Recent Articles Section - enhanced with improved null check */}
-        <section className="featured-section animate-slide-up">
-          <h2 className="featured-heading">Latest Article</h2>
-
-          {latestPost ? (
-            <>
-              <PostCard post={latestPost} featured={true} />
-
-              <div className="view-all animate-fade-in-delay">
-                <Link href="/blog" className="view-all-link">
-                  Browse all articles →
-                </Link>
-              </div>
-            </>
-          ) : (
-            <p className="empty-state">
-              No articles published yet. Check back soon!
-            </p>
-          )}
-        </section>
 
         {/* Contact CTA Section - Refined */}
         <section className="contact-cta-section animate-slide-up">
@@ -681,13 +686,7 @@ export default function Home({ recentPosts = [], projects = [] }) {
 
 export async function getStaticProps() {
   try {
-    const allPosts = getAllPosts() || [];
     const allProjects = getAllProjects() || [];
-
-    // Sort posts by date (newest first) and take only the 3 most recent
-    const recentPosts = allPosts
-      .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
-      .slice(0, 3);
 
     // Sort projects by lastUpdated date
     const projects = allProjects.sort(
@@ -698,7 +697,6 @@ export async function getStaticProps() {
 
     return {
       props: {
-        recentPosts,
         projects,
       },
     };
@@ -706,7 +704,6 @@ export async function getStaticProps() {
     console.error("Error in getStaticProps:", error);
     return {
       props: {
-        recentPosts: [],
         projects: [],
       },
     };
