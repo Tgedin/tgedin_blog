@@ -121,15 +121,15 @@ export default function Header() {
           href="/"
           className={`site-title ${isActive("/") ? "active" : ""}`}
         >
-          From Bricks to Bytes
+          <span className="main-title">Théo Gédin</span>
+          <span className="subtitle">Bricks to Bytes</span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="desktop-nav">
           <div className="nav-links">
-            <Link href="/blog" className={isActive("/blog") ? "active" : ""}>
-              Blog
-            </Link>
+            {/* Remove Blog link */}
+            {/* <Link href="/blog" className={isActive("/blog") ? "active" : ""}>Blog</Link> */}
             <Link
               href="/projects"
               className={isActive("/projects") ? "active" : ""}
@@ -200,13 +200,8 @@ export default function Header() {
       {/* Mobile Menu Drawer */}
       <div className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
         <nav>
-          <Link
-            href="/blog"
-            className={isActive("/blog") ? "active" : ""}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Blog
-          </Link>
+          {/* Remove Blog link */}
+          {/* <Link href="/blog" ...>Blog</Link> */}
           <Link
             href="/projects"
             className={isActive("/projects") ? "active" : ""}
@@ -236,6 +231,14 @@ export default function Header() {
           >
             Contact
           </Link>
+          <a
+            href="https://www.linkedin.com/in/théo-gedin-4a4365226"
+            className="nav-external-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
         </nav>
       </div>
 
@@ -245,7 +248,7 @@ export default function Header() {
           top: 0;
           width: 100%;
           z-index: 100;
-          background: rgba(var(--color-bg-rgb), 0.9);
+          background: rgba(var(--color-bg-rgb), 0.93);
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
           border-bottom: 1px solid var(--color-border);
@@ -255,7 +258,7 @@ export default function Header() {
         .header-container {
           max-width: 1200px;
           margin: 0 auto;
-          padding: 0.75rem 1.5rem;
+          padding: 0.5rem 1rem;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -267,16 +270,31 @@ export default function Header() {
         }
 
         .site-title {
-          font-size: 1.25rem;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          font-size: 1.15rem;
           font-weight: 700;
           color: var(--color-primary);
           text-decoration: none;
           transition: color var(--transition-fast) ease;
           letter-spacing: -0.02em;
+          line-height: 1.1;
         }
 
-        .site-title:hover {
-          color: var(--color-primary-dark);
+        .main-title {
+          font-size: 1.15rem;
+          font-weight: 700;
+          color: var(--color-primary);
+          line-height: 1.1;
+        }
+
+        .subtitle {
+          font-size: 0.92rem;
+          color: var(--color-secondary);
+          font-weight: 400;
+          margin-top: 0.1rem;
+          letter-spacing: 0.01em;
         }
 
         /* Desktop Navigation */
@@ -288,15 +306,15 @@ export default function Header() {
         .nav-links {
           display: flex;
           align-items: center;
-          gap: 2rem;
+          gap: 1.2rem;
         }
 
         .nav-links a {
           color: var(--color-text);
           text-decoration: none;
           font-weight: 500;
-          font-size: 0.95rem;
-          padding: 0.5rem 0;
+          font-size: 0.97rem;
+          padding: 0.4rem 0;
           position: relative;
           transition: color var(--transition-medium) ease;
         }
@@ -346,11 +364,12 @@ export default function Header() {
         .contact-button {
           background-color: var(--color-primary);
           color: white !important;
-          padding: 0.5rem 1rem;
+          padding: 0.45rem 0.95rem;
           border-radius: var(--radius-md);
           font-weight: 500;
           transition: all var(--transition-medium) ease;
           text-align: center;
+          font-size: 0.97rem;
         }
 
         .contact-button:hover,
@@ -370,8 +389,8 @@ export default function Header() {
           background: none;
           border: none;
           cursor: pointer;
-          margin-left: 1.5rem;
-          padding: 0.5rem;
+          margin-left: 1.1rem;
+          padding: 0.45rem;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -389,7 +408,7 @@ export default function Header() {
         .mobile-controls {
           display: none;
           align-items: center;
-          gap: 0.75rem;
+          gap: 0.5rem;
         }
 
         .mobile-menu-toggle {
@@ -432,7 +451,7 @@ export default function Header() {
           left: 0;
           width: 100%;
           background-color: var(--color-card-bg);
-          padding: 1rem 0;
+          padding: 0.7rem 0;
           box-shadow: var(--shadow-lg);
           transform: translateY(-10px);
           opacity: 0;
@@ -453,16 +472,17 @@ export default function Header() {
           flex-direction: column;
           max-width: 1200px;
           margin: 0 auto;
-          padding: 0 1.5rem;
+          padding: 0 1.1rem;
         }
 
         .mobile-menu a {
           text-decoration: none;
           color: var(--color-text);
           font-weight: 500;
-          padding: 0.875rem 0;
+          padding: 0.7rem 0;
           border-bottom: 1px solid var(--color-border);
           transition: color var(--transition-medium) ease;
+          font-size: 1.05rem;
         }
 
         .mobile-menu a:last-child {
@@ -493,7 +513,7 @@ export default function Header() {
           }
 
           .header-container {
-            padding: 0.625rem 1.25rem;
+            padding: 0.5rem 0.7rem;
           }
         }
       `}</style>
