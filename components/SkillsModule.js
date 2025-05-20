@@ -511,6 +511,7 @@ export default function SkillsModule({ defaultCollapsed = false }) {
           box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
           transition: box-shadow 0.3s ease;
           border: 1px solid var(--color-border);
+          max-width: 100%;
         }
 
         .skills-module:hover {
@@ -550,9 +551,9 @@ export default function SkillsModule({ defaultCollapsed = false }) {
         }
 
         .skills-note {
-          margin: 0 0 2rem;
-          padding: 1.25rem;
-          border-radius: 8px;
+          margin: 0 0 1.5rem;
+          padding: 1rem;
+          border-radius: 6px;
           background-color: var(--color-card-bg);
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
@@ -702,6 +703,150 @@ export default function SkillsModule({ defaultCollapsed = false }) {
         }
         .skills-tabs button:nth-child(4) {
           transition-delay: ${isCollapsed ? "0s" : "0.25s"};
+        }
+
+        /* Improved tab navigation for mobile */
+        .skills-tabs {
+          display: flex;
+          overflow-x: auto; /* Enable horizontal scrolling on small screens */
+          -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+          padding: 0.5rem 0.5rem; /* Reduced padding on mobile */
+          gap: 0.25rem; /* Smaller gap between tabs */
+          scrollbar-width: none; /* Hide scrollbar on Firefox */
+          -ms-overflow-style: none; /* Hide scrollbar on IE/Edge */
+          scroll-snap-type: x mandatory; /* Snap to tabs when scrolling */
+          position: sticky;
+          top: 65px; /* Adjusted to account for page header */
+          z-index: 20;
+        }
+
+        /* Hide scrollbar on Chrome/Safari */
+        .skills-tabs::-webkit-scrollbar {
+          display: none;
+        }
+
+        .skills-tab {
+          padding: 0.75rem 1rem; /* Smaller padding */
+          white-space: nowrap;
+          flex-shrink: 0; /* Prevent tabs from shrinking */
+          scroll-snap-align: start; /* Snap point */
+          border-radius: 6px; /* Rounded corners */
+          font-size: 0.9rem; /* Slightly smaller font */
+          transition: all 0.2s ease;
+        }
+
+        .skills-content {
+          padding: 1.25rem 1rem; /* Reduced padding */
+        }
+
+        /* More compact legend on mobile */
+        .skills-note {
+          margin: 0 0 1.5rem;
+          padding: 1rem;
+          border-radius: 6px;
+        }
+
+        /* Responsive grid adjustments */
+        @media (max-width: 768px) {
+          .skills-tabs {
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+          }
+
+          .skills-content {
+            padding: 1rem 0.75rem;
+          }
+
+          .skills-grid {
+            grid-template-columns: 1fr; /* Single column on mobile */
+            gap: 1rem; /* Reduced gap between cards */
+          }
+
+          .skill-card {
+            padding: 1.25rem; /* Reduced padding */
+          }
+
+          .skill-level {
+            font-size: 0.65rem; /* Smaller font for skill levels */
+            padding: 0.2rem 0.5rem;
+            min-width: 70px;
+          }
+
+          .skill-header h3 {
+            font-size: 1rem; /* Smaller heading */
+          }
+
+          .skill-description {
+            font-size: 0.85rem; /* Smaller description text */
+            margin-bottom: 1rem;
+          }
+
+          .skill-use-cases h4 {
+            font-size: 0.8rem;
+          }
+
+          .skill-use-cases ul {
+            font-size: 0.8rem;
+          }
+
+          .skill-levels-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+          }
+
+          .skill-level-item {
+            flex-basis: 48%;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .skills-header {
+            padding: 1rem;
+          }
+
+          .skills-header h2 {
+            font-size: 1.5rem;
+          }
+
+          .phase-description {
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+          }
+
+          .skill-level-item {
+            flex-basis: 100%; /* Full width on very small screens */
+          }
+        }
+
+        /* Add smooth scrolling effect for tab content */
+        .fade-in {
+          animation: smoothFadeIn 0.3s ease forwards;
+        }
+
+        @keyframes smoothFadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(5px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Help user identify scrollable tabs */
+        .skills-tabs::after {
+          content: "";
+          flex: 0 0 1px; /* Tiny invisible element */
+          padding-right: 1px;
+        }
+
+        /* Improve touch targets */
+        .skill-tab,
+        .skill-level {
+          touch-action: manipulation; /* Optimize for touch */
         }
       `}</style>
     </div>

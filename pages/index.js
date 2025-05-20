@@ -183,7 +183,7 @@ export default function Home({ recentPosts = [], projects = [] }) {
                 <span>X</span>
               </a>
               <a
-                href="https://www.linkedin.com/in/theo-gedin/"
+                href="https://www.linkedin.com/in/th%C3%A9o-gedin-4a4365226/"
                 className="contact-cta-social"
                 target="_blank"
                 rel="noopener noreferrer"

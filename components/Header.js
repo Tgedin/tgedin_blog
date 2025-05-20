@@ -232,7 +232,7 @@ export default function Header() {
             Contact
           </Link>
           <a
-            href="https://www.linkedin.com/in/théo-gedin-4a4365226"
+            href="https://www.linkedin.com/in/th%C3%A9o-gedin-4a4365226/"
             className="nav-external-link"
             target="_blank"
             rel="noopener noreferrer"
