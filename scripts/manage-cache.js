@@ -1,8 +1,11 @@
 /**
  * Cache Management Utility
  *
- * This script helps manage the Redis cache for the blog.
- * Use it to clear all or specific cache entries during deployments or content updates.
+ * This interactive CLI tool helps manage Redis cache:
+ * - List all cache keys
+ * - Clear all cache
+ * - Clear specific types of cache (posts, projects, sitemap)
+ * - Clear cache by patterns
  */
 
 const { createInterface } = require("readline");
