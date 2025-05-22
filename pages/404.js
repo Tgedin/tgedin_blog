@@ -17,9 +17,14 @@ export default function Custom404() {
           <Link href="/" className="home-button">
             Return to Home
           </Link>
-          <Link href="/blog" className="blog-button">
-            Browse Articles
-          </Link>
+          <a
+            href="https://theogedin.substack.com/"
+            className="blog-button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Visit Substack
+          </a>
         </div>
       </div>
 

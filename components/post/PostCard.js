@@ -3,76 +3,41 @@ import { formatDate } from "../../lib/date";
 import Tag from "../Tag";
 import Image from "next/image";
 
-// Featured images mapping - correct images for specific articles
-const FEATURED_IMAGES = {
-  // Map each article ID to its specific featured image
-  "beyond-reality-ai-worlds-and-the-paradox-of-authentic-experience":
-    "/the-mountains-7514392_1280.jpg",
-  "ai-and-meritocracy": "/meritocracy-banner.webp",
-  "beyond-abstractions": "/ahmad-odeh-KHipnBn7sdY-unsplash.jpg",
-};
-
-// Default rotation of featured images for posts without a specific mapping
+// Generic placeholder images for posts without a specific mapping
 const DEFAULT_FEATURED_IMAGES = [
   "/the-mountains-7514392_1280.jpg",
-  "/meritocracy-banner.webp",
-  "/ahmad-odeh-KHipnBn7sdY-unsplash.jpg",
+  "/placeholder-image-1.jpg",
+  "/placeholder-image-2.jpg",
 ];
 
-// Removed hideDescription prop
 export default function PostCard({ post, featured = false }) {
-  const postUrl = `/blog/${post.year}/${post.id}`;
+  // Redirect to Substack if this component is still used
+  const postUrl = "https://theogedin.substack.com/";
 
-  // Determine the image URL with the following priority:
-  let imageUrl;
-  if (FEATURED_IMAGES[post.id]) {
-    imageUrl = FEATURED_IMAGES[post.id];
-  } else {
-    const charCode =
-      (post.id.charCodeAt(0) || 0) % DEFAULT_FEATURED_IMAGES.length;
-    imageUrl = DEFAULT_FEATURED_IMAGES[charCode];
-  }
+  // Use a default image
+  const imageUrl = DEFAULT_FEATURED_IMAGES[0];
 
-  // Add default tags for specific articles if only 'thoughts' is present
-  let tags = post.tags || [];
-  if (tags.length === 1 && tags[0].toLowerCase() === "thoughts") {
-    if (
-      post.id ===
-      "beyond-reality-ai-worlds-and-the-paradox-of-authentic-experience"
-    ) {
-      tags = ["AI", "Philosophy", "Thoughts"];
-    } else if (post.id === "beyond-abstractions") {
-      tags = ["Civil Engineering", "Data Science", "Thoughts"];
-    } else if (post.id === "ai-and-meritocracy") {
-      tags = [
-        "AI",
-        "Meritocracy",
-        "Openness",
-        "Civil Engineering",
-        "Data Science",
-        "Thoughts",
-      ];
-    }
-  }
+  // Simplified tags
+  const tags = ["Substack"];
 
   return (
     <div className={`post-card ${featured ? "featured" : ""}`}>
-      <Link href={postUrl}>
+      <a href={postUrl} target="_blank" rel="noopener noreferrer">
         <div className="post-card-content">
           <div className="post-card-image-container">
             <div className="post-card-image-wrapper">
               <Image
                 src={imageUrl}
-                alt={`Cover image for ${post.title}`}
+                alt="Articles have moved to Substack"
                 width={featured ? 1280 : 640}
                 height={featured ? 720 : 360}
                 className="post-card-image"
-                priority={featured} // Load priority for featured posts
+                priority={featured}
               />
             </div>
           </div>
           <div className="post-card-text">
-            <h2 className="post-card-title">{post.title}</h2>
+            <h2 className="post-card-title">Articles Have Moved to Substack</h2>
             <div className="post-card-tags">
               {tags.map((tag) => (
                 <Tag key={tag} size="small">
@@ -82,7 +47,7 @@ export default function PostCard({ post, featured = false }) {
             </div>
           </div>
         </div>
-      </Link>
+      </a>
       <style jsx>{`
         .post-card {
           border-radius: 12px;

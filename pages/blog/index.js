@@ -1,85 +1,103 @@
 import MainLayout from "../../layouts/MainLayout";
-import { getAllPosts } from "../../lib/posts";
-import PostCard from "../../components/post/PostCard";
+import Link from "next/link";
 
-export default function Blog({ posts }) {
+export default function Blog() {
   return (
     <MainLayout
-      title="Blog"
-      description="Articles on data science, programming, and civil engineering"
+      title="Articles"
+      description="Read my articles on Substack - From urban planning to data science"
     >
       <div className="blog-container">
         <h1>Articles</h1>
 
         <p className="blog-intro">
-          Exploring the intersection of technology and humanity, from urban
-          systems to artificial intelligence. These articles document my journey
-          from civil engineering to data science, examining how we might build
-          systems that better serve human needs while questioning the
-          philosophical implications of our technological choices.
+          All my articles have moved to Substack. Please follow me there for
+          insights on the intersection of technology and humanity, from urban
+          systems to artificial intelligence.
         </p>
 
-        {posts.length > 0 ? (
-          // Use a structure similar to the landing page's featured section
-          <section className="posts-section">
-            {posts.map((post) => (
-              <PostCard
-                key={`${post.year}-${post.id}`}
-                post={post}
-                featured={true} // Apply featured layout to all cards
-              />
-            ))}
-          </section>
-        ) : (
-          <div className="empty-state">
-            <p>No posts published yet. Check back soon!</p>
+        <div className="substack-container">
+          <div className="substack-content">
+            <h2>Follow my writing on Substack</h2>
+            <p>
+              I publish regular articles about data science, urban planning, and
+              the future of technology. Subscribe to get the latest directly in
+              your inbox.
+            </p>
+            <a
+              href="https://theogedin.substack.com/"
+              className="substack-button"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit My Substack →
+            </a>
           </div>
-        )}
+        </div>
       </div>
 
       <style jsx>{`
         .blog-container {
-          /* Use content-width like featured-section */
           max-width: var(--content-width);
           margin: 0 auto;
-          padding: 3rem 1.5rem; /* Increased padding */
+          padding: 3rem 1.5rem;
         }
 
         h1 {
-          /* Match featured-heading style */
-          font-size: 2.25rem; /* Larger heading */
+          font-size: 2.25rem;
           margin-bottom: 1.25rem;
           padding-bottom: 0.75rem;
           border-bottom: 2px solid var(--color-border);
           text-align: left;
-          letter-spacing: -0.02em; /* Slight negative tracking for modern look */
-          font-weight: 700; /* Bolder heading */
+          letter-spacing: -0.02em;
+          font-weight: 700;
         }
 
         .blog-intro {
           font-size: 1.15rem;
           line-height: 1.7;
           color: var(--color-secondary);
-          margin-bottom: 3.5rem; /* More space before posts */
+          margin-bottom: 2.5rem;
           font-weight: 400;
-          max-width: 85%; /* Slightly narrower than container for readability */
-          opacity: 0.9; /* Subtle dimming for hierarchy */
+          max-width: 85%;
+          opacity: 0.9;
         }
 
-        .posts-section {
-          /* Container for the featured-style cards */
-          display: flex;
-          flex-direction: column;
-          gap: 3rem; /* Increased gap between cards */
+        .substack-container {
+          background-color: var(--color-card-bg);
+          border: 1px solid var(--color-border);
+          border-radius: 12px;
+          padding: 2rem;
+          margin-bottom: 3rem;
+          box-shadow: var(--shadow-md);
         }
 
-        .empty-state {
-          text-align: center;
-          padding: 3rem 0;
-          color: var(--color-text-secondary);
+        .substack-container h2 {
+          margin-top: 0;
+          margin-bottom: 1rem;
+          color: var(--color-primary);
         }
 
-        /* Responsive adjustments */
+        .substack-button {
+          display: inline-block;
+          background-color: var(--color-primary);
+          color: white;
+          padding: 0.8rem 1.6rem;
+          border-radius: var(--radius-md);
+          font-weight: 500;
+          font-size: 1.1rem;
+          margin-top: 1.5rem;
+          text-decoration: none;
+          transition: all 0.3s ease;
+        }
+
+        .substack-button:hover {
+          background-color: var(--color-primary-dark);
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-md);
+          text-decoration: none;
+        }
+
         @media (max-width: 768px) {
           .blog-container {
             padding: 2rem 1rem;
@@ -92,17 +110,11 @@ export default function Blog({ posts }) {
           .blog-intro {
             font-size: 1.05rem;
             max-width: 100%;
-            margin-bottom: 2.5rem;
           }
 
-          .posts-section {
-            gap: 2.5rem;
+          .substack-container {
+            padding: 1.5rem;
           }
-        }
-
-        /* Dark mode enhancement */
-        [data-theme="dark"] .blog-intro {
-          opacity: 0.85; /* Adjust for dark mode readability */
         }
       `}</style>
     </MainLayout>
@@ -110,11 +122,7 @@ export default function Blog({ posts }) {
 }
 
 export async function getStaticProps() {
-  const posts = getAllPosts();
-
   return {
-    props: {
-      posts,
-    },
+    props: {},
   };
 }
