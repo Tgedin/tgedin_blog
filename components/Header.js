@@ -145,7 +145,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Newsletter
+              My Substack
             </a>
             <Link
               href="/contact"
@@ -222,7 +222,7 @@ export default function Header() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Newsletter
+            My Substack
           </a>
           <Link
             href="/contact"

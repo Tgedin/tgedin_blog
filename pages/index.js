@@ -74,7 +74,7 @@ export default function Home({ recentPosts = [], projects = [] }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span className="btn-icon">📬</span> Join Newsletter
+              <span className="btn-icon">📬</span> My Substack
             </a>
             <a href="/about" className="secondary-cta">
               <span className="btn-icon">👋</span> Learn About Me
@@ -182,7 +182,7 @@ export default function Home({ recentPosts = [], projects = [] }) {
                 <span>X</span>
               </a>
               <a
-                href="https://www.linkedin.com/in/th%C3%A9o-gedin-4a4365226/"
+                href="https://www.linkedin.com/in/théo-gédin-4a4365226"
                 className="contact-cta-social"
                 target="_blank"
                 rel="noopener noreferrer"

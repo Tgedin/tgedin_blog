@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function SkillsModule({ defaultCollapsed = false }) {
-  const [activeTab, setActiveTab] = useState("cloud");
+  const [activeTab, setActiveTab] = useState("development");
   const [animating, setAnimating] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false); // Always expanded by default
 
@@ -23,7 +23,9 @@ export default function SkillsModule({ defaultCollapsed = false }) {
     <div className={`skills-module expanded`}>
       {/* Heading */}
       <div className="skills-header">
-        <h2 className="featured-heading">AI Engineering for Construction</h2>
+        <h2 className="featured-heading">
+          Transversal Skills: AI Engineering ↔ Real Estate Development
+        </h2>
       </div>
 
       {/* Content that is always visible */}
@@ -31,452 +33,281 @@ export default function SkillsModule({ defaultCollapsed = false }) {
         {/* Goal Section */}
         <div className="goal-section">
           <p>
-            Drawing from my real estate project management experience, I'm
-            building expertise across the full AI engineering stack to implement
-            intelligent solutions in construction. My focus is on bringing AI
-            orchestration, MLOps, and data engineering to transform how we build
-            and manage infrastructure.
+            My unique background combines{" "}
+            <strong>
+              real estate project management and development expertise
+            </strong>{" "}
+            with emerging <strong>AI engineering capabilities</strong>. This
+            transversal skillset positions me to bridge the gap between
+            traditional construction processes and intelligent automation -
+            understanding both the technical challenges and industry
+            complexities that most AI solutions fail to address.
           </p>
         </div>
 
         {/* Updated Tab Navigation */}
         <div className="skills-tabs" role="tablist">
           <button
-            className={`skills-tab ${isActive("cloud") ? "active" : ""}`}
-            onClick={() => handleTabChange("cloud")}
+            className={`skills-tab ${isActive("development") ? "active" : ""}`}
+            onClick={() => handleTabChange("development")}
             role="tab"
-            aria-selected={isActive("cloud")}
-            aria-controls="cloud-content"
-            id="cloud-tab"
-            tabIndex={isActive("cloud") ? 0 : -1}
+            aria-selected={isActive("development")}
+            aria-controls="development-content"
+            id="development-tab"
+            tabIndex={isActive("development") ? 0 : -1}
           >
-            Cloud Infrastructure
+            Development & Project Leadership
           </button>
           <button
-            className={`skills-tab ${isActive("ml") ? "active" : ""}`}
-            onClick={() => handleTabChange("ml")}
+            className={`skills-tab ${
+              isActive("ai-engineering") ? "active" : ""
+            }`}
+            onClick={() => handleTabChange("ai-engineering")}
             role="tab"
-            aria-selected={isActive("ml")}
-            aria-controls="ml-content"
-            id="ml-tab"
-            tabIndex={isActive("ml") ? 0 : -1}
+            aria-selected={isActive("ai-engineering")}
+            aria-controls="ai-engineering-content"
+            id="ai-engineering-tab"
+            tabIndex={isActive("ai-engineering") ? 0 : -1}
           >
-            Production ML
-          </button>
-          <button
-            className={`skills-tab ${isActive("technical") ? "active" : ""}`}
-            onClick={() => handleTabChange("technical")}
-            role="tab"
-            aria-selected={isActive("technical")}
-            aria-controls="technical-content"
-            id="technical-tab"
-            tabIndex={isActive("technical") ? 0 : -1}
-          >
-            Technical Foundation
-          </button>
-          <button
-            className={`skills-tab ${isActive("business") ? "active" : ""}`}
-            onClick={() => handleTabChange("business")}
-            role="tab"
-            aria-selected={isActive("business")}
-            aria-controls="business-content"
-            id="business-tab"
-            tabIndex={isActive("business") ? 0 : -1}
-          >
-            Business-Critical
+            AI Engineering & Technical Foundation
           </button>
         </div>
 
-        <div className={`skills-content ${animating ? "fade-out" : "fade-in"}`}>
-          {/* Core Cloud Infrastructure */}
-          {isActive("cloud") && (
+        {/* Skills Content */}
+        <div className={`skills-content ${animating ? "animating" : ""}`}>
+          {/* Development & Project Leadership Tab */}
+          {isActive("development") && (
             <div
-              className="skills-phase"
-              id="cloud-content"
+              className="skills-grid"
+              id="development-content"
               role="tabpanel"
-              aria-labelledby="cloud-tab"
+              aria-labelledby="development-tab"
             >
-              <div className="skills-grid">
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>Container Deployment</h3>
-                    <span className="skill-level applied">Applied</span>
-                  </div>
-                  <p className="skill-description">
-                    Docker containerization with Cloud Run for scalable,
-                    serverless deployment
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>Docker + Cloud Run</li>
-                      <li>Serverless auto-scaling</li>
-                      <li>Multi-environment deployments</li>
-                    </ul>
-                  </div>
+              {/* Strategic Project Management */}
+              <div className="skill-card">
+                <div className="skill-header">
+                  <h4>Strategic Project Management</h4>
                 </div>
-
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>Database Management</h3>
-                    <span className="skill-level applied">Applied</span>
-                  </div>
-                  <p className="skill-description">
-                    Managing both relational and NoSQL databases for different
-                    data patterns
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>Cloud SQL (PostgreSQL)</li>
-                      <li>Firestore for real-time data</li>
-                      <li>Data migration strategies</li>
-                    </ul>
-                  </div>
+                <p>
+                  End-to-end project delivery from conception to completion.
+                  Proven track record managing complex real estate developments
+                  with multimillion-euro budgets and multi-year timelines.
+                </p>
+                <div className="skill-applications">
+                  <span className="application-tag">Portfolio Management</span>
+                  <span className="application-tag">Resource Allocation</span>
+                  <span className="application-tag">Risk Assessment</span>
                 </div>
+              </div>
 
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>API & Microservices</h3>
-                    <span className="skill-level practicing">Practicing</span>
-                  </div>
-                  <p className="skill-description">
-                    Building robust REST APIs and microservices architecture
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>RESTful API design</li>
-                      <li>Service decomposition</li>
-                      <li>API gateway patterns</li>
-                    </ul>
-                  </div>
+              {/* Cross-Functional Leadership */}
+              <div className="skill-card">
+                <div className="skill-header">
+                  <h4>Cross-Functional Team Leadership</h4>
                 </div>
-
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>CI/CD Pipelines</h3>
-                    <span className="skill-level learning">Learning</span>
-                  </div>
-                  <p className="skill-description">
-                    Automated deployment pipelines for reliable software
-                    delivery
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>GitHub Actions workflows</li>
-                      <li>Automated testing integration</li>
-                      <li>Environment promotion</li>
-                    </ul>
-                  </div>
+                <p>
+                  Coordinating interdisciplinary stakeholders including
+                  architects, engineers, contractors, legal teams, and financial
+                  partners. Expert at aligning diverse priorities toward common
+                  objectives.
+                </p>
+                <div className="skill-applications">
+                  <span className="application-tag">
+                    Stakeholder Management
+                  </span>
+                  <span className="application-tag">Conflict Resolution</span>
+                  <span className="application-tag">
+                    Strategic Communication
+                  </span>
                 </div>
+              </div>
 
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>Cost & Resource Optimization</h3>
-                    <span className="skill-level practicing">Practicing</span>
-                  </div>
-                  <p className="skill-description">
-                    Managing cloud costs and optimizing resource allocation
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>Cloud billing analysis</li>
-                      <li>Resource right-sizing</li>
-                      <li>Performance monitoring</li>
-                    </ul>
-                  </div>
+              {/* Market Analysis & Feasibility */}
+              <div className="skill-card">
+                <div className="skill-header">
+                  <h4>Market Analysis & Feasibility Studies</h4>
+                </div>
+                <p>
+                  Territorial analysis, market assessment, and investment
+                  viability evaluation. Data-driven approach to identifying
+                  opportunities and quantifying risks in complex real estate
+                  markets.
+                </p>
+                <div className="skill-applications">
+                  <span className="application-tag">Financial Modeling</span>
+                  <span className="application-tag">Market Research</span>
+                  <span className="application-tag">Due Diligence</span>
+                </div>
+              </div>
+
+              {/* Regulatory & Compliance */}
+              <div className="skill-card">
+                <div className="skill-header">
+                  <h4>Regulatory Navigation & Compliance</h4>
+                </div>
+                <p>
+                  Deep understanding of urban planning regulations, zoning
+                  requirements, and development approval processes. Experience
+                  managing complex regulatory frameworks across multiple
+                  jurisdictions.
+                </p>
+                <div className="skill-applications">
+                  <span className="application-tag">Permit Management</span>
+                  <span className="application-tag">Legal Compliance</span>
+                  <span className="application-tag">Policy Analysis</span>
+                </div>
+              </div>
+
+              {/* Land Acquisition & Negotiation */}
+              <div className="skill-card">
+                <div className="skill-header">
+                  <h4>Land Acquisition & Negotiation</h4>
+                </div>
+                <p>
+                  Proven track record in property owner negotiations,
+                  acquisition strategy, and relationship building. Expert at
+                  structuring deals that balance risk, profitability, and
+                  stakeholder interests.
+                </p>
+                <div className="skill-applications">
+                  <span className="application-tag">Contract Negotiation</span>
+                  <span className="application-tag">Relationship Building</span>
+                  <span className="application-tag">Deal Structuring</span>
+                </div>
+              </div>
+
+              {/* Strategic Development Experience */}
+              <div className="skill-card">
+                <div className="skill-header">
+                  <h4>Strategic Development Experience</h4>
+                </div>
+                <p>
+                  2-year apprenticeship with a major French real estate
+                  developer, gaining hands-on experience in large-scale urban
+                  development projects and strategic portfolio management.
+                </p>
+                <div className="skill-applications">
+                  <span className="application-tag">Urban Development</span>
+                  <span className="application-tag">Portfolio Strategy</span>
+                  <span className="application-tag">Investment Analysis</span>
                 </div>
               </div>
             </div>
           )}
 
-          {/* Production ML Engineering */}
-          {isActive("ml") && (
+          {/* AI Engineering & Technical Foundation Tab */}
+          {isActive("ai-engineering") && (
             <div
-              className="skills-phase"
-              id="ml-content"
+              className="skills-grid"
+              id="ai-engineering-content"
               role="tabpanel"
-              aria-labelledby="ml-tab"
+              aria-labelledby="ai-engineering-tab"
             >
-              <div className="skills-grid">
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>Vertex AI Platform</h3>
-                    <span className="skill-level learning">Learning</span>
-                  </div>
-                  <p className="skill-description">
-                    End-to-end ML platform for training, deployment, and
-                    monitoring
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>Model training pipelines</li>
-                      <li>Endpoint deployment</li>
-                      <li>Performance monitoring</li>
-                    </ul>
-                  </div>
+              {/* ML Operations & Model Deployment */}
+              <div className="skill-card">
+                <div className="skill-header">
+                  <h4>ML Operations & Model Deployment</h4>
                 </div>
-
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>MLOps Pipelines</h3>
-                    <span className="skill-level exploring">Exploring</span>
-                  </div>
-                  <p className="skill-description">
-                    Production ML workflows with versioning and automated
-                    testing
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>Model versioning (MLflow)</li>
-                      <li>A/B testing frameworks</li>
-                      <li>Continuous monitoring</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>Data Engineering at Scale</h3>
-                    <span className="skill-level practicing">Practicing</span>
-                  </div>
-                  <p className="skill-description">
-                    Building robust data pipelines for large-scale processing
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>BigQuery analytics</li>
-                      <li>Data pipeline orchestration</li>
-                      <li>ETL/ELT processes</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>Model Optimization</h3>
-                    <span className="skill-level exploring">Exploring</span>
-                  </div>
-                  <p className="skill-description">
-                    Balancing performance, cost, and accuracy in production
-                    models
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>Performance tuning</li>
-                      <li>Cost-accuracy trade-offs</li>
-                      <li>Resource allocation</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>Responsible AI</h3>
-                    <span className="skill-level learning">Learning</span>
-                  </div>
-                  <p className="skill-description">
-                    Implementing ethical AI practices and bias detection
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>Bias detection techniques</li>
-                      <li>Fairness metrics</li>
-                      <li>Ethical AI frameworks</li>
-                    </ul>
-                  </div>
+                <p>
+                  Building production-ready ML pipelines with Vertex AI,
+                  implementing automated model training, validation, and
+                  deployment workflows for scalable AI solutions.
+                </p>
+                <div className="skill-applications">
+                  <span className="application-tag">Vertex AI</span>
+                  <span className="application-tag">MLOps Pipelines</span>
+                  <span className="application-tag">Model Monitoring</span>
                 </div>
               </div>
-            </div>
-          )}
 
-          {/* Technical Foundation */}
-          {isActive("technical") && (
-            <div
-              className="skills-phase"
-              id="technical-content"
-              role="tabpanel"
-              aria-labelledby="technical-tab"
-            >
-              <div className="skills-grid">
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>Python Development</h3>
-                    <span className="skill-level proficient">Proficient</span>
-                  </div>
-                  <p className="skill-description">
-                    Full-stack Python for ML workflows and web development
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>ML libraries (scikit-learn, pandas)</li>
-                      <li>Web frameworks (FastAPI, Flask)</li>
-                      <li>Data processing pipelines</li>
-                    </ul>
-                  </div>
+              {/* Cloud Infrastructure & Orchestration */}
+              <div className="skill-card">
+                <div className="skill-header">
+                  <h4>Cloud Infrastructure & Orchestration</h4>
                 </div>
-
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>SQL & Data Analysis</h3>
-                    <span className="skill-level proficient">Proficient</span>
-                  </div>
-                  <p className="skill-description">
-                    Advanced SQL for data analysis and database management
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>Complex queries & joins</li>
-                      <li>Performance optimization</li>
-                      <li>Data warehousing patterns</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>REST API Design</h3>
-                    <span className="skill-level applied">Applied</span>
-                  </div>
-                  <p className="skill-description">
-                    Designing and implementing robust API interfaces
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>RESTful design principles</li>
-                      <li>API versioning strategies</li>
-                      <li>Documentation (OpenAPI)</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>Git & Collaboration</h3>
-                    <span className="skill-level proficient">Proficient</span>
-                  </div>
-                  <p className="skill-description">
-                    Version control and collaborative development workflows
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>Git workflows (GitFlow)</li>
-                      <li>Code review processes</li>
-                      <li>Branch management</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>Security Practices</h3>
-                    <span className="skill-level practicing">Practicing</span>
-                  </div>
-                  <p className="skill-description">
-                    Implementing security best practices in cloud applications
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>IAM (Identity & Access Management)</li>
-                      <li>Data encryption at rest/transit</li>
-                      <li>Authentication & authorization</li>
-                    </ul>
-                  </div>
+                <p>
+                  Designing and managing cloud-native architectures using
+                  Docker, Cloud Run, and serverless technologies. Focus on
+                  cost-effective, scalable solutions for AI workloads.
+                </p>
+                <div className="skill-applications">
+                  <span className="application-tag">Docker & Containers</span>
+                  <span className="application-tag">Cloud Run</span>
+                  <span className="application-tag">
+                    Serverless Architecture
+                  </span>
                 </div>
               </div>
-            </div>
-          )}
 
-          {/* Business-Critical Skills */}
-          {isActive("business") && (
-            <div
-              className="skills-phase"
-              id="business-content"
-              role="tabpanel"
-              aria-labelledby="business-tab"
-            >
-              <div className="skills-grid">
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>System Design Thinking</h3>
-                    <span className="skill-level applied">Applied</span>
-                  </div>
-                  <p className="skill-description">
-                    Designing scalable, reliable, and performant systems
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>Scalability planning</li>
-                      <li>Reliability engineering</li>
-                      <li>Performance optimization</li>
-                    </ul>
-                  </div>
+              {/* Data Engineering & Analytics */}
+              <div className="skill-card">
+                <div className="skill-header">
+                  <h4>Data Engineering & Analytics</h4>
                 </div>
-
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>Production Troubleshooting</h3>
-                    <span className="skill-level proficient">Proficient</span>
-                  </div>
-                  <p className="skill-description">
-                    Quickly diagnosing and resolving production issues
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>Log analysis & debugging</li>
-                      <li>Performance monitoring</li>
-                      <li>Incident response</li>
-                    </ul>
-                  </div>
+                <p>
+                  Building robust data pipelines and analytics solutions using
+                  BigQuery, SQL, and Python. Expertise in transforming complex
+                  datasets into actionable business insights.
+                </p>
+                <div className="skill-applications">
+                  <span className="application-tag">BigQuery & SQL</span>
+                  <span className="application-tag">Data Pipelines</span>
+                  <span className="application-tag">Python Analytics</span>
                 </div>
+              </div>
 
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>Cross-functional Communication</h3>
-                    <span className="skill-level proficient">Proficient</span>
-                  </div>
-                  <p className="skill-description">
-                    Translating technical concepts to business stakeholders
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>Technical to business translation</li>
-                      <li>Stakeholder management</li>
-                      <li>Project communication</li>
-                    </ul>
-                  </div>
+              {/* AI Integration & Automation */}
+              <div className="skill-card">
+                <div className="skill-header">
+                  <h4>AI Integration & Automation</h4>
                 </div>
-
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>Agile Methodologies</h3>
-                    <span className="skill-level proficient">Proficient</span>
-                  </div>
-                  <p className="skill-description">
-                    Rapid iteration and startup-style development approaches
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>Scrum & Kanban practices</li>
-                      <li>Sprint planning & execution</li>
-                      <li>Continuous improvement</li>
-                    </ul>
-                  </div>
+                <p>
+                  Implementing intelligent automation solutions, API
+                  integrations, and workflow orchestration. Focus on bridging AI
+                  capabilities with existing business processes.
+                </p>
+                <div className="skill-applications">
+                  <span className="application-tag">API Development</span>
+                  <span className="application-tag">Workflow Automation</span>
+                  <span className="application-tag">System Integration</span>
                 </div>
+              </div>
 
-                <div className="skill-card">
-                  <div className="skill-header">
-                    <h3>Documentation & Knowledge Sharing</h3>
-                    <span className="skill-level proficient">Proficient</span>
-                  </div>
-                  <p className="skill-description">
-                    Creating clear documentation and sharing technical knowledge
-                  </p>
-                  <div className="skill-use-cases">
-                    <ul>
-                      <li>Technical documentation</li>
-                      <li>Knowledge base creation</li>
-                      <li>Team training & mentoring</li>
-                    </ul>
-                  </div>
+              {/* Data-Driven Decision Making */}
+              <div className="skill-card">
+                <div className="skill-header">
+                  <h4>Data-Driven Decision Making</h4>
+                </div>
+                <p>
+                  Applying analytical approaches developed in real estate to
+                  optimize AI model performance, resource allocation, and
+                  technical architecture decisions.
+                </p>
+                <div className="skill-applications">
+                  <span className="application-tag">
+                    Performance Optimization
+                  </span>
+                  <span className="application-tag">Cost Analysis</span>
+                  <span className="application-tag">Technical Strategy</span>
+                </div>
+              </div>
+
+              {/* Responsible AI & Security */}
+              <div className="skill-card">
+                <div className="skill-header">
+                  <h4>Responsible AI & Security</h4>
+                </div>
+                <p>
+                  Implementing secure, ethical AI solutions with focus on data
+                  privacy, model transparency, and regulatory compliance -
+                  critical for enterprise adoption.
+                </p>
+                <div className="skill-applications">
+                  <span className="application-tag">
+                    Security Best Practices
+                  </span>
+                  <span className="application-tag">Ethical AI</span>
+                  <span className="application-tag">Compliance Management</span>
                 </div>
               </div>
             </div>
@@ -486,236 +317,174 @@ export default function SkillsModule({ defaultCollapsed = false }) {
 
       <style jsx>{`
         .skills-module {
-          margin: 2rem 0 3rem;
-          border-radius: 12px;
-          overflow: hidden;
+          margin: 2rem 0;
           background-color: var(--color-card-bg);
-          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-          transition: box-shadow 0.3s ease;
+          border-radius: var(--radius-lg);
           border: 1px solid var(--color-border);
-          max-width: 100%;
-        }
-
-        .skills-module:hover {
-          box-shadow: 0 6px 24px rgba(0, 0, 0, 0.16);
+          overflow: hidden;
+          transition: all var(--transition-medium) ease;
         }
 
         .skills-header {
-          padding: 1.5rem 2rem;
-          background-color: var(--color-card-bg);
-          border-bottom: 1px solid var(--color-border);
+          padding: 2rem 2rem 1rem;
+          text-align: center;
         }
 
-        .skills-header h2 {
+        .featured-heading {
+          font-size: 1.8rem;
           margin: 0;
           color: var(--color-headings);
-          font-size: 1.75rem;
-          margin-bottom: 0;
+          font-weight: 700;
         }
 
         .goal-section {
-          padding: 1.5rem 2rem;
-          color: var(--color-secondary);
-          font-size: 1.05rem;
-          line-height: 1.6;
           background: linear-gradient(
             135deg,
-            rgba(139, 90, 43, 0.05),
-            rgba(139, 90, 43, 0.02)
+            var(--color-primary),
+            var(--color-primary-dark)
           );
-          border-bottom: 1px solid var(--color-border);
+          color: white;
+          padding: 2rem;
+          margin: 0 2rem 2rem;
+          border-radius: var(--radius-md);
+          text-align: center;
+        }
+
+        .goal-section p {
+          margin: 0;
+          font-size: 1.1rem;
+          line-height: 1.6;
         }
 
         .collapsible-content {
-          max-height: none;
-          overflow: visible;
-          opacity: 1;
-          visibility: visible;
+          overflow: hidden;
+          transition: all var(--transition-medium) ease;
         }
 
         .collapsible-content.visible {
-          display: block;
+          max-height: none;
+          opacity: 1;
         }
 
         .skills-tabs {
           display: flex;
-          overflow-x: auto;
-          -webkit-overflow-scrolling: touch;
-          padding: 0.5rem;
-          gap: 0.25rem;
-          scrollbar-width: none;
-          -ms-overflow-style: none;
-          scroll-snap-type: x mandatory;
-          position: sticky;
-          top: 65px;
-          z-index: 20;
-          background-color: var(--color-card-bg);
           border-bottom: 1px solid var(--color-border);
-        }
-
-        .skills-tabs::-webkit-scrollbar {
-          display: none;
+          margin: 0 2rem;
+          gap: 0;
         }
 
         .skills-tab {
-          padding: 0.75rem 1rem;
-          border: none;
+          flex: 1;
+          padding: 1rem 1.5rem;
           background: none;
-          font-family: var(--font-primary);
-          font-size: 0.9rem;
-          color: var(--color-text);
+          border: none;
           cursor: pointer;
-          transition: all 0.2s ease;
-          border-bottom: 2px solid transparent;
-          white-space: nowrap;
-          flex-shrink: 0;
-          scroll-snap-align: start;
-          border-radius: 6px;
+          font-size: 0.95rem;
+          font-weight: 500;
+          color: var(--color-secondary);
+          border-bottom: 3px solid transparent;
+          transition: all var(--transition-fast) ease;
+          position: relative;
         }
 
         .skills-tab:hover {
           color: var(--color-primary);
-          background-color: rgba(139, 90, 43, 0.05);
+          background-color: var(--color-hover);
         }
 
         .skills-tab.active {
           color: var(--color-primary);
-          border-bottom: 2px solid var(--color-primary);
-          font-weight: 500;
-          background-color: rgba(139, 90, 43, 0.05);
+          border-bottom-color: var(--color-primary);
+          background-color: var(--color-hover);
         }
 
         .skills-content {
-          padding: 1.5rem;
+          padding: 2rem;
+          transition: opacity var(--transition-fast) ease;
+        }
+
+        .skills-content.animating {
+          opacity: 0.7;
         }
 
         .skills-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-          gap: 1.25rem;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 1.5rem;
         }
 
         .skill-card {
+          background-color: var(--color-bg);
           border: 1px solid var(--color-border);
-          border-radius: 12px;
-          padding: 1.25rem;
-          background-color: var(--color-card-bg);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+          border-radius: var(--radius-md);
+          padding: 1.5rem;
+          transition: all var(--transition-medium) ease;
           height: 100%;
           display: flex;
           flex-direction: column;
         }
 
         .skill-card:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-md);
+          border-color: var(--color-primary);
         }
 
         .skill-header {
-          display: flex;
-          align-items: flex-start;
-          justify-content: space-between;
-          margin-bottom: 0.75rem;
-          gap: 0.5rem;
+          margin-bottom: 1rem;
         }
 
-        .skill-header h3 {
+        .skill-header h4 {
           margin: 0;
           font-size: 1.1rem;
-          letter-spacing: -0.01em;
-          line-height: 1.3;
-          flex: 1;
-          color: var(--color-headings);
+          color: var(--color-primary);
+          font-weight: 600;
         }
 
-        .skill-description {
-          font-size: 0.9rem;
+        .skill-card p {
+          color: var(--color-secondary);
+          line-height: 1.6;
           margin-bottom: 1rem;
-          color: var(--color-text);
-          line-height: 1.5;
           flex-grow: 1;
         }
 
-        .skill-use-cases {
+        .skill-applications {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
           margin-top: auto;
         }
 
-        .skill-use-cases ul {
-          margin: 0;
-          padding: 0 0 0 1.25rem;
-          font-size: 0.85rem;
+        .application-tag {
+          background-color: var(--color-tag-bg);
+          color: var(--color-primary);
+          padding: 0.3rem 0.6rem;
+          border-radius: var(--radius-sm);
+          font-size: 0.8rem;
+          font-weight: 500;
+          border: 1px solid var(--color-border);
         }
 
-        .skill-use-cases li {
-          margin-bottom: 0.4rem;
-          color: var(--color-secondary);
-        }
-
-        .skill-level {
-          font-size: 0.7rem;
-          font-weight: 600;
-          padding: 0.25rem 0.6rem;
-          border-radius: 12px;
-          color: white;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          min-width: 80px;
-          text-align: center;
-          letter-spacing: 0.02em;
-        }
-
-        .skill-level.proficient {
-          background-color: #4caf50;
-        }
-
-        .skill-level.applied {
-          background-color: #2196f3;
-        }
-
-        .skill-level.practicing {
-          background-color: #ff9800;
-        }
-
-        .skill-level.learning {
-          background-color: #9c27b0;
-        }
-
-        .skill-level.exploring {
-          background-color: #607d8b;
-        }
-
-        .fade-out {
-          opacity: 0;
-          transition: opacity 0.2s ease;
-        }
-
-        .fade-in {
-          opacity: 1;
-          transition: opacity 0.2s ease;
-          animation: smoothFadeIn 0.3s ease forwards;
-        }
-
-        @keyframes smoothFadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(5px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
           .skills-tabs {
-            padding: 0.5rem;
-            margin-bottom: 0.5rem;
+            flex-direction: column;
+            margin: 0 1rem;
+          }
+
+          .skills-tab {
+            border-bottom: 1px solid var(--color-border);
+            border-right: none;
+            text-align: left;
+          }
+
+          .skills-tab.active {
+            border-bottom-color: var(--color-border);
+            border-left: 3px solid var(--color-primary);
           }
 
           .skills-content {
-            padding: 1rem 0.75rem;
+            padding: 1.5rem;
           }
 
           .skills-grid {
@@ -723,47 +492,28 @@ export default function SkillsModule({ defaultCollapsed = false }) {
             gap: 1rem;
           }
 
-          .skill-card {
-            padding: 1rem;
-          }
-
-          .skill-level {
-            font-size: 0.65rem;
-            padding: 0.2rem 0.5rem;
-            min-width: 70px;
-          }
-
-          .skill-header h3 {
-            font-size: 1rem;
-          }
-
-          .skill-description {
-            font-size: 0.85rem;
-            margin-bottom: 0.875rem;
-          }
-
-          .skill-use-cases ul {
-            font-size: 0.8rem;
-          }
-
           .goal-section {
-            padding: 1rem;
-            font-size: 0.95rem;
+            margin: 0 1rem 1.5rem;
+            padding: 1.5rem;
+          }
+
+          .skills-header {
+            padding: 1.5rem 1rem 1rem;
+          }
+
+          .featured-heading {
+            font-size: 1.5rem;
           }
         }
 
         @media (max-width: 480px) {
-          .skills-header {
+          .skill-card {
             padding: 1rem;
           }
 
-          .skills-header h2 {
-            font-size: 1.5rem;
-          }
-
-          .skills-tab {
-            font-size: 0.85rem;
-            padding: 0.6rem 0.8rem;
+          .application-tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
           }
         }
       `}</style>
