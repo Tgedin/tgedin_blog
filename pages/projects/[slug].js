@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import MainLayout from "../../layouts/MainLayout";
 import { getProjectBySlug, getAllProjects } from "../../lib/projects";
-import { formatDate } from "../../lib/date";
 import { MDXRemote } from "next-mdx-remote";
 import BootcampSyllabus from "../../components/BootcampSyllabus";
 import Image from "next/image";
@@ -80,9 +79,6 @@ export default function Project({ project }) {
           )}
           <h1>{frontmatter.title}</h1>
           <div className="project-meta">
-            <time dateTime={frontmatter.date}>
-              {formatDate(frontmatter.date)}
-            </time>
             <span className="project-status">
               {frontmatter.completed ? "Completed" : "Ongoing"}
             </span>

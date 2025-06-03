@@ -2,7 +2,6 @@ import MainLayout from "../../layouts/MainLayout";
 import Link from "next/link";
 import Image from "next/image";
 import { getAllProjects } from "../../lib/projects";
-import { formatDate } from "../../lib/date";
 
 export default function Projects({ projects }) {
   // Group projects by status
@@ -52,11 +51,6 @@ export default function Projects({ projects }) {
                     <div className="project-card-content">
                       <h3>{project.title}</h3>
                       {project.description && <p>{project.description}</p>}
-                      <div className="project-meta-info">
-                        <span className="project-update-info">
-                          Last updated: {formatDate(project.lastUpdated)}
-                        </span>
-                      </div>
                     </div>
                   </Link>
                 </div>
@@ -93,11 +87,6 @@ export default function Projects({ projects }) {
                     <div className="project-card-content">
                       <h3>{project.title}</h3>
                       {project.description && <p>{project.description}</p>}
-                      <div className="project-meta-info">
-                        <span className="project-update-info">
-                          Last updated: {formatDate(project.lastUpdated)}
-                        </span>
-                      </div>
                     </div>
                   </Link>
                 </div>

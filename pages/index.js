@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import MainLayout from "../layouts/MainLayout";
 import { getAllProjects } from "../lib/projects";
-import { formatDate } from "../lib/date";
 import SkillsModule from "../components/SkillsModule";
 import BricksToBytes from "../components/BricksToBytes";
 import PostCard from "../components/post/PostCard";
