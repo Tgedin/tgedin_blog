@@ -173,7 +173,7 @@ export default function About() {
           <p>
             You can view my CV below or{" "}
             <a
-              href="/Théo Gédin - Business Analyst CV (1).pdf"
+              href="/theo-gedin-business-analyst-cv.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="download-link"
@@ -185,7 +185,7 @@ export default function About() {
 
           <div className="cv-embed-container">
             <iframe
-              src="/Théo Gédin - Business Analyst CV (1).pdf"
+              src="/theo-gedin-business-analyst-cv.pdf"
               className="cv-iframe"
               title="Théo Gédin CV"
               frameBorder="0"
@@ -193,7 +193,7 @@ export default function About() {
               <p>
                 Your browser does not support PDFs.{" "}
                 <a
-                  href="/Théo Gédin - Business Analyst CV (1).pdf"
+                  href="/theo-gedin-business-analyst-cv.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
