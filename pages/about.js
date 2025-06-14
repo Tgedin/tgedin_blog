@@ -167,40 +167,41 @@ export default function About() {
           </p>
         </section>
 
-        {/* New CV/Resume Section */}
+        {/* CV/Resume Section */}
         <section className="about-section cv-section">
           <h2>Curriculum Vitae</h2>
           <p>
-            My CV is available in multiple languages. Click below to download:
+            You can view my CV below or{" "}
+            <a
+              href="/Théo Gédin - Business Analyst CV (1).pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="download-link"
+            >
+              download it here
+            </a>
+            :
           </p>
-          <div className="cv-buttons">
-            <a
-              href="/theo-gedin-cv-en.pdf"
-              className="cv-button"
-              target="_blank"
-              rel="noopener noreferrer"
+
+          <div className="cv-embed-container">
+            <iframe
+              src="/Théo Gédin - Business Analyst CV (1).pdf"
+              className="cv-iframe"
+              title="Théo Gédin CV"
+              frameBorder="0"
             >
-              <span className="cv-lang">English</span>
-              <span className="cv-download">Download CV</span>
-            </a>
-            <a
-              href="/theo-gedin-cv-es.pdf"
-              className="cv-button"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="cv-lang">Español</span>
-              <span className="cv-download">Descargar CV</span>
-            </a>
-            <a
-              href="/theo-gedin-cv-fr.pdf"
-              className="cv-button"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="cv-lang">Français</span>
-              <span className="cv-download">Télécharger CV</span>
-            </a>
+              <p>
+                Your browser does not support PDFs.{" "}
+                <a
+                  href="/Théo Gédin - Business Analyst CV (1).pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download the PDF
+                </a>{" "}
+                instead.
+              </p>
+            </iframe>
           </div>
         </section>
 
@@ -387,6 +388,33 @@ export default function About() {
         .cv-download {
           font-size: 0.9rem;
           color: var(--color-primary);
+        }
+
+        /* CV Embed Styling */
+        .cv-embed-container {
+          margin: 2rem 0;
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-md);
+          overflow: hidden;
+          background-color: var(--color-card-bg);
+        }
+
+        .cv-iframe {
+          width: 100%;
+          height: 800px;
+          border: none;
+          display: block;
+        }
+
+        .download-link {
+          color: var(--color-primary);
+          text-decoration: underline;
+          font-weight: 500;
+        }
+
+        .download-link:hover {
+          color: var(--color-primary-dark, var(--color-primary));
+          text-decoration: none;
         }
 
         /* Responsive styling for CV buttons */
